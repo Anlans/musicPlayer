@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
-import 'package:musicplayer/pages/splash/splash.dart';
-import 'package:musicplayer/pages/home/home.dart';
+import 'package:musicplayer/router.dart';
 
 void main() {
-  runApp(App())
+  runApp(App());
 }
 
 class App extends StatelessWidget {
@@ -14,10 +12,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title:'my first flutter',
-      routes: {
-        "/": (context)=>SplashPage(),
-        "/home": (context)=>HomePage(),
-      },
+      routes: routes,
       initialRoute: '/',
     );
 
