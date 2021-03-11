@@ -17,3 +17,11 @@ samples, guidance on mobile development, and a full API reference.
 
 ### dayOne 开屏页的设计(等待后台加载)
 Navigator.pushReplacementNamed(context, '/home');
+screen.padding.top
+screen.size.width  逻辑像素
+
+/widgets 作为通用的组件文件夹
+/home 首页文件夹
+header.dart置顶手机状态栏
+slider.dart滚动条
+category目录
