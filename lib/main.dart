@@ -5,7 +5,7 @@ import 'package:musicplayer/pages/splash/splash.dart';
 import 'package:musicplayer/pages/home/home.dart';
 
 void main() {
-  runApp(App());
+  runApp(App())
 }
 
 class App extends StatelessWidget {
