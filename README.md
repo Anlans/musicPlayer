@@ -29,3 +29,7 @@ category目录
 banner.dart
 轮播图
 用到了carousel_slider(很有趣的小公举)
+
+/widgets
+song_list.dart 歌单
+voidCallback
