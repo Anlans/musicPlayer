@@ -13,8 +13,10 @@ dependencies:
     sdk: flutter
 
   flutter_hooks: ^0.14.0
+
   flutter_redux_hooks: ^0.1.1
 
+  carousel_slider: ^3.0.0
 
   cupertino_icons: ^1.0.0
 
@@ -31,3 +33,6 @@ flutter:
     - assets/splash_logo_sm.png
     - assets/header_icon_music.png
     - assets/tmp_icon_music.png
+    - assets/tmp_slider_1.png
+    - assets/tmp_slider_2.png
+    - assets/tmp_slider_3.png

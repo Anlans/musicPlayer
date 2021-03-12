@@ -23,5 +23,9 @@ screen.size.width  逻辑像素
 /widgets 作为通用的组件文件夹
 /home 首页文件夹
 header.dart置顶手机状态栏
-slider.dart滚动条
+banner.dart滚动条
 category目录
+
+banner.dart
+轮播图
+用到了carousel_slider(很有趣的小公举)
