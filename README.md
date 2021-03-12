@@ -20,7 +20,7 @@ Navigator.pushReplacementNamed(context, '/home');
 screen.padding.top
 screen.size.width  逻辑像素
 
-/widgets 作为通用的组件文件夹
+/widgets 作为通用的组件文件夹(可重用)
 /home 首页文件夹
 header.dart置顶手机状态栏
 banner.dart滚动条
