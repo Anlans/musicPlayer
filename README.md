@@ -30,6 +30,204 @@ banner.dart
 轮播图
 用到了carousel_slider(很有趣的小公举)
 
+----------------------------------------------
+
 /widgets
 song_list.dart 歌单
 voidCallback
+
+##### recommend_list.dart 推荐列表歌单
+1.使用二维List对columns添加歌单信息,每个Column固定为3个可重用播放组件,按照歌曲数目确定一共多少列,步数为3
+```
+  Widget build(BuildContext context) {
+    final screen=Screen(context);
+
+    final columns=[];
+
+    for(var i=0;i<items.length;i+=3){       //每个Column固定为3个可重用播放组件,按照歌曲数目确定一共多少列,步数为3
+      columns.add(items.sublist(i, i+3));
+    }
+    // print('items: ${items.length}');
+    // print('columns: $columns');           //2x3列表
+
+    return
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Container(
+          padding: EdgeInsets.only(top: screen.calc(4), left: screen.calc(32)),
+          child: Row(
+            children: columns.map<Widget>((arr)=>Column(                        //此处的map需加上Widget类型,规范编码
+              children: arr.map<Widget>((data)=>_Item(data: data)).toList(),    //md, 逻辑完美
+            )).toList(),
+          ),
+        ),
+      );
+  }
+```
+
+
+##### global_navigation_bar.dart 底部导航栏
+1.这里也用到了VoidCallback类型的参数,因为不需要传递什么值,本设计普遍在用到GestureDetector的onTap时作为参数使用
+ 
+2.使用循环方式,map取得index对下方功能键图标进行相应匹配,其中MapEntry的API注释如下
+
+'/** Creates an entry with [key] and [value]. */'
+
+```dart
+    return Container(
+      padding: EdgeInsets.only(top: screen.calc(9)),
+      height: screen.calc(98),
+      decoration: BoxDecoration(
+        color: Color(0x66ffffff),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,//使用主轴让底部图标空间相同
+        //循环生成导航栏下方功能键
+        children: navigationItems.asMap().map((index,item)=>MapEntry(index, NavigationBarItem(
+          img: item['img'],
+          activeImg: item['activeImg'],
+          title: item['title'],
+          active: value==index,
+        ))).values.toList(),
+      ),
+    );
+```
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

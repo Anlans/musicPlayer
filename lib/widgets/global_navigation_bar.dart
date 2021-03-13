@@ -20,45 +20,77 @@ import 'package:musicplayer/util/screen_util.dart';
 //   }
 // }
 
+
+
+
+
+const navigationItems=[
+  {
+    'img': 'assets/icon-music-acc-b.png',
+    'activeImg': 'assets/icon-music-acc.png',
+    'title': '发现',
+  },
+  {
+    'img': 'assets/icon-video-b.png',
+    'activeImg': 'assets/icon-video.png',
+    'title': '视频',
+  },
+  {
+    'img': 'assets/icon-music-b.png',
+    'activeImg': 'assets/icon-music.png',
+    'title': '我的',
+  },
+  {
+    'img': 'assets/icon-group-b.png',
+    'activeImg': 'assets/icon-group.png',
+    'title': '云村',
+  },
+  {
+    'img': 'assets/icon-person-b.png',
+    'activeImg': 'assets/icon-person.png',
+    'title': '账号',
+  }
+
+];
+
+typedef NavigationBarCallback=void Function(int);
+
 class GlobalNavigationBar extends HookWidget{
+  final int value;
+  // final NavigationBarCallback onChanged;//active状态
+
+  GlobalNavigationBar({Key key, this.value=0}):super(key: key);//默认第一个发现亮
+
   @override
   Widget build(BuildContext context) {
     final screen=Screen(context);
     
     return Container(
+      padding: EdgeInsets.only(top: screen.calc(9)),
       height: screen.calc(98),
       decoration: BoxDecoration(
         color: Color(0x66ffffff),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,//使用主轴让底部图标空间相同
-        children: [
-          NavigationBarItem(
-            img: 'assets/icon-music-acc-b.png',
-            active_img: 'assets/icon-music-acc.png',
-            active: true,
-          ),
-          NavigationBarItem(
-            img: 'assets/icon-video-b.png',
-            active_img: 'assets/icon-video.png',
-            active: false,
-          ),
-          NavigationBarItem(
-            img: 'assets/icon-music-b.png',
-            active_img: 'assets/icon-music.png',
-            active: false,
-          ),
-          NavigationBarItem(
-            img: 'assets/icon-group-b.png',
-            active_img: 'assets/icon-group.png',
-            active: false,
-          ),
-          NavigationBarItem(
-            img: 'assets/icon-person-b.png',
-            active_img: 'assets/icon-person.png',
-            active: false,
-          ),
-        ],
+        //循环生成导航栏下方功能键
+        children: navigationItems.asMap().map((index,item)=>MapEntry(index, NavigationBarItem(
+          img: item['img'],
+          activeImg: item['activeImg'],
+          title: item['title'],
+          active: value==index,
+          onTap: (){
+            switch(index){
+              case 0:
+                Navigator.pushNamed(context, '/home');
+                break;
+              case 2:
+                Navigator.pushNamed(context, '/square');
+                break;
+            }
+            // onChanged(index);//等待父级传参(home传参)
+          },
+        ))).values.toList(),
       ),
     );
   }
@@ -66,15 +98,17 @@ class GlobalNavigationBar extends HookWidget{
 
 class NavigationBarItem extends StatelessWidget{
   final String img;
-  final String active_img;  //亮起来的底部图标
+  final String activeImg;     //亮起来的底部图标
   final String title;
-  final bool active;        //确认当前所在页面图标是否处于此页面(以便切换图标空心实心效果)
+  final bool active;          //确认当前所在页面图标是否处于此页面(以便切换图标空心实心效果)
+  final VoidCallback onTap;   //点击
 
   NavigationBarItem({Key key,
-    this.active_img,
+    this.activeImg,
     this.img,
     this.title,
-    this.active=false
+    this.active=false,
+    this.onTap,
   }):super(key: key);
 
 
@@ -82,33 +116,39 @@ class NavigationBarItem extends StatelessWidget{
   Widget build(BuildContext context) {
     final screen=Screen(context);
 
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            width: screen.calc(56),
-            height: screen.calc(56),
-            decoration: BoxDecoration(
-              gradient: active?LinearGradient(
-                colors: [
-                  Color(0xffff584a),
-                  Color(0xffff1f14),
-                ],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerLeft,
-              ):null,//渐变
-              // image: DecorationImage(
-              //   image: AssetImage('assets/icon-music-acc.png'),
-              //   scale: 0.5,
-              // ),
-              borderRadius: BorderRadius.circular(screen.calc(28)),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        child: Column(
+          children: [
+            Container(
+              width: screen.calc(56),
+              height: screen.calc(56),
+              decoration: BoxDecoration(
+                gradient: active?LinearGradient(
+                  colors: [
+                    Color(0xffff584a),
+                    Color(0xffff1f14),
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerLeft,
+                ):null,//渐变
+                // image: DecorationImage(
+                //   image: AssetImage('assets/icon-music-acc.png'),
+                //   scale: 0.5,
+                // ),
+                borderRadius: BorderRadius.circular(screen.calc(28)),
+              ),
+              child: Center(
+                child:  Image.asset(active?activeImg:img, width: screen.calc(30), height: screen.calc(30),),
+              ),
             ),
-            child: Center(
-              child:  Image.asset(active?active_img:img, width: screen.calc(30), height: screen.calc(30),),
-            ),
-          ),
-          Text('data'),
-        ],
+            Text(title, style: TextStyle(
+              fontSize: screen.calc(22),
+              color: active?Color(0xffff1f14):Color(0xff969696),
+            ),),
+          ],
+        ),
       ),
     );
   }

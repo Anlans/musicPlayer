@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musicplayer/util/screen_util.dart';
+import 'package:musicplayer/widgets/global_navigation_bar.dart';
 
 class SquarePage extends StatelessWidget {
   @override
@@ -14,6 +15,9 @@ class SquarePage extends StatelessWidget {
             Text('广场'),
           ]
         ),
+      ),
+      bottomNavigationBar: GlobalNavigationBar(
+        value: 2,
       ),
     );
   }

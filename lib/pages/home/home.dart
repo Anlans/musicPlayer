@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:musicplayer/util/screen_util.dart';
 import 'package:musicplayer/pages/home/header.dart';
 import 'package:musicplayer/pages/home/banner.dart';
 import 'package:musicplayer/pages/home/category.dart';
 import 'package:musicplayer/pages/square/square.dart';
-import 'package:musicplayer/widgets/song_list.dart';
 import 'package:musicplayer/widgets/song_list.dart';
 import 'package:musicplayer/widgets/recommend_list.dart';
 import 'package:musicplayer/widgets/global_navigation_bar.dart';
@@ -19,19 +19,19 @@ const songList1=[
 ];
 
 const recommendList1=[
-    {'id':'1111', 'img': 'assets/tmp_cover_1.jpg', 'title': 'Tempest', 'artist': 'Capo　Productions', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
-    {'id':'1111', 'img': 'assets/tmp_cover_2.jpg', 'title': '岁月神偷', 'artist': '金玟岐', 'tip':'于吾却尽是沙漠'},
-    {'id':'1111', 'img': 'assets/tmp_cover_3.jpg', 'title': '最美的期待', 'artist': '周笔畅', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
-    {'id':'1111', 'img': 'assets/tmp_cover_4.jpg', 'title': 'Tempest', 'artist': 'Capo　Productions', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
-    {'id':'1111', 'img': 'assets/tmp_cover_5.jpg', 'title': 'Tempest', 'artist': 'Capo　Productions', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
-    {'id':'1111', 'img': 'assets/tmp_cover_6.jpg', 'title': 'Tempest', 'artist': 'Capo　Productions', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
+  {'id':'1111', 'img': 'assets/tmp_cover_1.jpg', 'title': 'Tempest', 'artist': 'Capo　Productions', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
+  {'id':'1111', 'img': 'assets/tmp_cover_2.jpg', 'title': '岁月神偷', 'artist': '金玟岐', 'tip':'于吾却尽是沙漠'},
+  {'id':'1111', 'img': 'assets/tmp_cover_3.jpg', 'title': '最美的期待', 'artist': '周笔畅', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
+  {'id':'1111', 'img': 'assets/tmp_cover_4.jpg', 'title': 'Tempest', 'artist': 'Capo　Productions', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
+  {'id':'1111', 'img': 'assets/tmp_cover_5.jpg', 'title': 'Tempest', 'artist': 'Capo　Productions', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
+  {'id':'1111', 'img': 'assets/tmp_cover_6.jpg', 'title': 'Tempest', 'artist': 'Capo　Productions', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
 ];
 
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var screen=Screen(context);
+    final screen=Screen(context);
 
     return Scaffold(
       body: DefaultTextStyle(
@@ -64,7 +64,9 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: GlobalNavigationBar(),//底部导航栏
+      bottomNavigationBar: GlobalNavigationBar(
+        value: 0,
+      ),//底部导航栏
     );
   }
 
