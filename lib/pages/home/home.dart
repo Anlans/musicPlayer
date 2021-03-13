@@ -7,6 +7,7 @@ import 'package:musicplayer/pages/square/square.dart';
 import 'package:musicplayer/widgets/song_list.dart';
 import 'package:musicplayer/widgets/song_list.dart';
 import 'package:musicplayer/widgets/recommend_list.dart';
+import 'package:musicplayer/widgets/global_navigation_bar.dart';
 
 const songList1=[
   {'id': '43423', 'img': 'assets/tmp_cover_1.jpg', 'count': '9亿', 'title': '[华语新歌] 最新华语音乐专辑'},
@@ -63,6 +64,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: GlobalNavigationBar(),//底部导航栏
     );
   }
 
