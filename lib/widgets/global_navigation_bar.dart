@@ -65,33 +65,39 @@ class GlobalNavigationBar extends HookWidget{
   Widget build(BuildContext context) {
     final screen=Screen(context);
     
-    return Container(
-      padding: EdgeInsets.only(top: screen.calc(9)),
-      height: screen.calc(98),
-      decoration: BoxDecoration(
-        color: Color(0x66ffffff),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,//使用主轴让底部图标空间相同
-        //循环生成导航栏下方功能键
-        children: navigationItems.asMap().map((index,item)=>MapEntry(index, NavigationBarItem(
-          img: item['img'],
-          activeImg: item['activeImg'],
-          title: item['title'],
-          active: value==index,
-          onTap: (){
-            switch(index){
-              case 0:
-                Navigator.pushNamed(context, '/home');
-                break;
-              case 2:
-                Navigator.pushNamed(context, '/square');
-                break;
-            }
-            // onChanged(index);//等待父级传参(home传参)
-          },
-        ))).values.toList(),
-      ),
+    return Hero(
+      tag: '_bottom_nav_bar_1',
+      child: DefaultTextStyle(
+        style: TextStyle(inherit: false),
+        child: Container(
+          padding: EdgeInsets.only(top: screen.calc(9)),
+          height: screen.calc(98),
+          decoration: BoxDecoration(
+            color: Color(0x66ffffff),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,//使用主轴让底部图标空间相同
+            //循环生成导航栏下方功能键
+            children: navigationItems.asMap().map((index,item)=>MapEntry(index, NavigationBarItem(
+              img: item['img'],
+              activeImg: item['activeImg'],
+              title: item['title'],
+              active: value==index,
+              onTap: (){
+                switch(index){
+                  case 0:
+                    Navigator.pushNamed(context, '/home');
+                    break;
+                  case 2:
+                    Navigator.pushNamed(context, '/square');
+                    break;
+                }
+                // onChanged(index);//等待父级传参(home传参)
+              },
+            ))).values.toList(),
+          ),
+        ),
+      )
     );
   }
 }

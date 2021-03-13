@@ -92,6 +92,46 @@ voidCallback
       ),
     );
 ```
+
+2.对于Hero组件的应用,可以解决不同Container直接切换页面时,离开Scaffold脚手架会短暂的字体脱离,导致回到原生状态,此种情况的解决方法,
+TextStyle(inherit: false), 必须要使用inherit属性false,即父级啥样你啥样别乱动
+ - Hero组件,用于各个页面的穿越(果然Hero就是不一样,haha)
+```dart
+    return Hero(
+      tag: '_bottom_nav_bar_1',
+      child: DefaultTextStyle(
+        style: TextStyle(inherit: false),
+        child: Container(
+          padding: EdgeInsets.only(top: screen.calc(9)),
+          height: screen.calc(98),
+          decoration: BoxDecoration(
+            color: Color(0x66ffffff),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,//使用主轴让底部图标空间相同
+            //循环生成导航栏下方功能键
+            children: navigationItems.asMap().map((index,item)=>MapEntry(index, NavigationBarItem(
+              img: item['img'],
+              activeImg: item['activeImg'],
+              title: item['title'],
+              active: value==index,
+              onTap: (){
+                switch(index){
+                  case 0:
+                    Navigator.pushNamed(context, '/home');
+                    break;
+                  case 2:
+                    Navigator.pushNamed(context, '/square');
+                    break;
+                }
+                // onChanged(index);//等待父级传参(home传参)
+              },
+            ))).values.toList(),
+          ),
+        ),
+      )
+    );
+```
  
 
 
