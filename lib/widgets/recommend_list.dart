@@ -5,9 +5,9 @@ import 'package:musicplayer/util/screen_util.dart';
 typedef PlayCallBack=void Function(String);
 class RecommendList extends StatelessWidget{
   final String title;
-  final VoidCallback onMore;
-  final List<Map> items;
-  final PlayCallBack onPlay;
+  final VoidCallback onMore;        //GestureDetector的onTap点击参数
+  final List<Map> items;            //歌曲资源参数
+  final PlayCallBack onPlay;        //用户点击play所做事件
 
   RecommendList({Key key, this.title, this.onMore, this.items, this.onPlay}):super(key:key);
 
@@ -22,7 +22,7 @@ class RecommendList extends StatelessWidget{
 
           _Header(title: title, onMore: onMore),  //播放全部 头部
 
-          _Body(title: title, onMore: onMore,items: items,),   //播放头部所在下方的歌单排布
+          _Body(title: title, onMore: onMore,items: items, onPlay: onPlay),   //播放头部所在下方的歌单排布
 
         ],
       ),
@@ -81,19 +81,21 @@ class _Body extends StatelessWidget{
   final List<Map> items;
   final String title;
   final VoidCallback onMore;
-  _Body({Key key, this.title, this.onMore, this.items}):super(key:key);
+  final PlayCallBack onPlay;
+
+  _Body({Key key, this.title, this.onMore, this.items, this.onPlay}):super(key:key);
 
   @override
   Widget build(BuildContext context) {
     final screen=Screen(context);
 
     final columns=[];
-    while(items.length>0) {
-      columns.add(items.sublist(0,3));
-      items.removeRange(0, 3);
-    }
 
-    // print(columns);
+    for(var i=0;i<items.length;i+=3){       //每个Column固定为3个可重用播放组件,按照歌曲数目确定一共多少列,步数为3
+      columns.add(items.sublist(i, i+3));
+    }
+    // print('items: ${items.length}');
+    // print('columns: $columns');           //2x3列表
 
     return
       SingleChildScrollView(
@@ -112,9 +114,9 @@ class _Body extends StatelessWidget{
 
 //播放全部所在下方歌单 单个组件
 class _Item extends StatelessWidget{
-  final Map data;
-
-  _Item({Key key, this.data}):super(key:key);
+  final Map data;                 //歌曲信息数据map
+  final PlayCallBack onPlay;
+  _Item({Key key, this.data, this.onPlay}):super(key:key);
 
   @override
   Widget build(BuildContext context) {
@@ -175,19 +177,27 @@ class _Item extends StatelessWidget{
               ),
             ),
           ),
-          Container(
-            child: Center(
-              child: Container(
-                height: screen.calc(50),
-                width: screen.calc(50),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xffe6e6e6), width: screen.calc(2)),
-                  borderRadius: BorderRadius.circular(screen.calc(25)),
+
+          GestureDetector(
+            onTap: (){
+              onPlay(data['id']);
+            },
+            child: Container(
+              child: Center(
+                child: Container(
+                  height: screen.calc(50),
+                  width: screen.calc(50),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Color(0xffe6e6e6), width: screen.calc(2)),
+                    borderRadius: BorderRadius.circular(screen.calc(25)),
+                  ),
+                  child: Icon(Icons.play_arrow, size: screen.calc(30), color: Color(0xffff3a3a),),
                 ),
-                child: Icon(Icons.play_arrow, size: screen.calc(30), color: Color(0xffff3a3a),),
               ),
             ),
           ),
+
+
         ],
       ),
     );
