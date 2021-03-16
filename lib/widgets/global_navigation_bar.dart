@@ -24,7 +24,7 @@ import 'package:musicplayer/util/screen_util.dart';
 
 
 
-const navigationItems=[
+const navigationItems=[//底部导航栏按钮信息
   {
     'img': 'assets/icon-music-acc-b.png',
     'activeImg': 'assets/icon-music-acc.png',
@@ -73,10 +73,10 @@ class GlobalNavigationBar extends HookWidget{
           padding: EdgeInsets.only(top: screen.calc(9)),
           height: screen.calc(98),
           decoration: BoxDecoration(
-            color: Color(0x66ffffff),
+            color: Color(0x66ffffff),                         //底部栏的透明度颜色
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,//使用主轴让底部图标空间相同
+            mainAxisAlignment: MainAxisAlignment.spaceAround,  //使用主轴让底部图标空间相同
             //循环生成导航栏下方功能键
             children: navigationItems.asMap().map((index,item)=>MapEntry(index, NavigationBarItem(
               img: item['img'],
@@ -102,6 +102,8 @@ class GlobalNavigationBar extends HookWidget{
   }
 }
 
+
+//单个导航栏按钮的设计
 class NavigationBarItem extends StatelessWidget{
   final String img;
   final String activeImg;     //亮起来的底部图标
@@ -122,16 +124,17 @@ class NavigationBarItem extends StatelessWidget{
   Widget build(BuildContext context) {
     final screen=Screen(context);
 
-    return GestureDetector(
+    return GestureDetector(                     //使用GestureDetector来定义点击（无敌方便）
       onTap: onTap,
       child: Container(
         child: Column(
           children: [
             Container(
+              //按钮状态背景红色范围
               width: screen.calc(56),
               height: screen.calc(56),
               decoration: BoxDecoration(
-                gradient: active?LinearGradient(
+                gradient: active?LinearGradient(//渐变颜色函数
                   colors: [
                     Color(0xffff584a),
                     Color(0xffff1f14),
@@ -145,7 +148,7 @@ class NavigationBarItem extends StatelessWidget{
                 // ),
                 borderRadius: BorderRadius.circular(screen.calc(28)),
               ),
-              child: Center(
+              child: Center(                    //确认当前状态并展示是否被点击所对应的图片空心（true）or实心（false）
                 child:  Image.asset(active?activeImg:img, width: screen.calc(30), height: screen.calc(30),),
               ),
             ),

@@ -53,7 +53,7 @@ class SongList extends StatelessWidget{
         ),
       ),
       SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
+        scrollDirection: Axis.horizontal,//使用横向滑动
         child: Container(
             margin: EdgeInsets.only(top: screen.calc(24)),
             padding: EdgeInsets.only(left: screen.calc(22), right: screen.calc(22)),

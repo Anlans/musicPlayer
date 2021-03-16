@@ -9,7 +9,8 @@ import 'package:musicplayer/widgets/song_list.dart';
 import 'package:musicplayer/widgets/recommend_list.dart';
 import 'package:musicplayer/widgets/global_navigation_bar.dart';
 
-const songList1=[
+
+const songList1=[       //歌单信息
   {'id': '43423', 'img': 'assets/tmp_cover_1.jpg', 'count': '9亿', 'title': '[华语新歌] 最新华语音乐专辑'},
   {'id': '666', 'img': 'assets/tmp_cover_2.jpg', 'count': '34.9亿', 'title': '今天从<Titan>听起|私人雷达'},
   {'id': '231', 'img': 'assets/tmp_cover_3.jpg', 'count': '5335', 'title': '[美语新歌]'},
@@ -18,7 +19,7 @@ const songList1=[
   {'id': '344', 'img': 'assets/tmp_cover_6.jpg', 'count': '20亿亿', 'title': '[泰语新歌]'},
 ];
 
-const recommendList1=[
+const recommendList1=[  //推荐列表歌曲信息
   {'id':'1111', 'img': 'assets/tmp_cover_1.jpg', 'title': 'Tempest', 'artist': 'Capo　Productions', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
   {'id':'1111', 'img': 'assets/tmp_cover_2.jpg', 'title': '岁月神偷', 'artist': '金玟岐', 'tip':'于吾却尽是沙漠'},
   {'id':'1111', 'img': 'assets/tmp_cover_3.jpg', 'title': '最美的期待', 'artist': '周笔畅', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
@@ -64,9 +65,9 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: GlobalNavigationBar(
-        value: 0,
-      ),//底部导航栏
+      bottomNavigationBar: GlobalNavigationBar(     //底部导航栏
+        value: 0,                                   //开启后默认所在页
+      ),
     );
   }
 

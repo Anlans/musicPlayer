@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:musicplayer/util/screen_util.dart';
+import 'package:musicplayer/widgets/playing.dart';
 
 class Header extends StatelessWidget{
   @override
@@ -53,17 +54,7 @@ class Header extends StatelessWidget{
 
           Container(
             margin: EdgeInsets.only(left: screen.calc(32)),
-            height: screen.calc(60),
-            width: screen.calc(60),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(screen.calc(30)),
-                border: Border.all(width: screen.calc(3), color: Color(0xffe5e5e5)),
-                image: DecorationImage(
-                  image: AssetImage('assets/tmp_icon_music.png'),
-                ),
-              ),
-            ),
+            child: Playing(),
           ),
         ],
       )
