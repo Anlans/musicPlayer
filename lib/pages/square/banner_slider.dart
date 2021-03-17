@@ -4,13 +4,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:musicplayer/util/screen_util.dart';
 
 var items=[
-  {'index':0, 'title':'111'},
-  {'index':1, 'title':'222'},
-  {'index':2, 'title':'333'},
-  {'index':3, 'title':'444'},
-  {'index':4, 'title':'555'},
-  {'index':5, 'title':'666'},
-  {'index':6, 'title':'777'},
+  {'index':0, 'title':'请保持眉梢欢悦，因为有人等你对视', 'img': 'assets/tmp_square_cover_1.png'},
+  {'index':1, 'title':'222', 'img': 'assets/tmp_square_cover_2.png'},
+  {'index':2, 'title':'333', 'img': 'assets/tmp_square_cover_3.png'},
+  {'index':3, 'title':'444', 'img': 'assets/tmp_square_cover_1.png'},
+  {'index':4, 'title':'555', 'img': 'assets/tmp_square_cover_2.png'},
+  {'index':5, 'title':'666', 'img': 'assets/tmp_square_cover_3.png'},
+  {'index':6, 'title':'777', 'img': 'assets/tmp_square_cover_2.png'},
 ];
 
 class BannerSlider extends HookWidget{
@@ -101,18 +101,37 @@ class BannerSlider extends HookWidget{
                   scale: data['scale'],
                   child: Opacity(
                     opacity: data['opacity'],
+
                     child: Container(
                       width: W,
                       height: H,
                       decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(screen.calc(10)),
+                        boxShadow: [//添加阴影
+                          BoxShadow(
+                            color: Color(0x66000000),   //半透明
+                            blurRadius: screen.calc(20),//半径
+                          ),
+                        ],
                       ),
-                      child: Center(
-                        child: Text(item['title'], style: TextStyle(
-                          fontSize: 40,
-                        ),),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(screen.calc(10)),
+                        child: Column(//自带居中效果
+                          crossAxisAlignment: CrossAxisAlignment.start,//左对齐
+                          children: [
+                            Image.asset(item['img'], width: screen.calc(344), height: screen.calc(344),),
+                            Padding(
+                              padding: EdgeInsets.only(top: screen.calc(18), left: screen.calc(16), right: screen.calc(16)),
+                              child: Text(item['title'], maxLines: 2, style: TextStyle(
+                                fontSize: screen.calc(23),
+                              )),
+                            )
+                          ],
+                        ),
                       ),
                     ),
+
                   ),
                 )
             );
