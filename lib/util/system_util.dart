@@ -2,7 +2,7 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-
+//提交
 void setStatusBarStyle(Brightness iconStyle){//干掉系统状态栏
   if(Platform.isAndroid){
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
