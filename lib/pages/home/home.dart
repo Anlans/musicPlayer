@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:musicplayer/util/screen_util.dart';
+import 'package:musicplayer/util/system_util.dart';
 import 'package:musicplayer/pages/home/header.dart';
 import 'package:musicplayer/pages/home/banner.dart';
 import 'package:musicplayer/pages/home/category.dart';
@@ -34,6 +35,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final screen=Screen(context);
 
+    setStatusBarStyle(Brightness.dark);
+
     return Scaffold(
       body: DefaultTextStyle(
         style: TextStyle(
@@ -41,6 +44,9 @@ class HomePage extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+            ),
             padding: EdgeInsets.only(top: screen.top+screen.calc(7)),
             child: Column(
               children: [
