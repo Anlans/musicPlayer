@@ -9,6 +9,21 @@ import 'package:musicplayer/pages/square/category.dart';
 import 'package:musicplayer/pages/square/square_list.dart';
 import 'package:musicplayer/pages/square/banner_slider.dart';
 
+const items=[
+  {'id': 0, 'title': '推荐', 'color': null},
+  {'id': 1, 'title': '官方', 'color': null},
+  {'id': 2, 'title': '精品', 'color': 0xffe7aa5a},
+  {'id': 3, 'title': '欧美', 'color': null},
+  {'id': 4, 'title': '电子', 'color': null},
+  {'id': 5, 'title': '流行', 'color': null},
+  {'id': 6, 'title': '乡村', 'color': null},
+  {'id': 7, 'title': '其他', 'color': null},
+  {'id': 8, 'title': 'a', 'color': null},
+  {'id': 9, 'title': 'b', 'color': null},
+  {'id': 10, 'title': 'c', 'color': null},
+  {'id': 11, 'title': 'd', 'color': null},
+];
+
 class SquarePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,6 +32,8 @@ class SquarePage extends HookWidget {
     final categoryID=useState(items[0]['id']);
 
     setStatusBarStyle(Brightness.light);
+
+    print(args);
 
     return Scaffold(
       body: Stack(
