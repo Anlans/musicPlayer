@@ -8,6 +8,7 @@ import 'package:musicplayer/pages/square/header.dart';
 import 'package:musicplayer/pages/square/category.dart';
 import 'package:musicplayer/pages/square/square_list.dart';
 import 'package:musicplayer/pages/square/banner_slider.dart';
+import 'package:musicplayer/util/player_util.dart';
 
 const categoryItems=[
   {'id': 0, 'title': '推荐', 'color': null},

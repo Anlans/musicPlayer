@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:musicplayer/router.dart';
 import 'package:musicplayer/util/system_util.dart';
 
+class PlayerWidget extends InheritedWidget{
+  @override
+  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
+
+  }
+
+}
+
 void main() {
   runApp(App());
 

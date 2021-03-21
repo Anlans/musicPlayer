@@ -142,6 +142,15 @@ Column自带居中效果
 square_list banner_slider下面的歌单列表
 
 
+播放器
+全局共享的几种方法
+1. redux
+    数据
+   
+2. InheriteWidget
+    更新
+   
+3. 模块的方式
 
 
 
