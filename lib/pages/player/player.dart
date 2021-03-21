@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:musicplayer/util/screen_util.dart';
 import 'package:musicplayer/pages/player/header.dart';
@@ -19,20 +21,33 @@ class PlayerPage extends StatelessWidget{
     print(args);
 
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(top: screen.top, left: screen.calc(24), right: screen.calc(24)),
-        decoration: BoxDecoration(
-          color: Color(0x99000000),
-        ),
-        child: Column(
-          children: [
-            Header(),
-            PlayerInner(),
-            ControlPanel1(),
-            Progress(),
-            ControlPanel2(),
-          ],
-        ),
+      body: Stack(
+        children: [//唱片机背景模糊图
+          Image.asset('assets/tmp_cover_1.jpg', height: screen.height, width: screen.width, fit: BoxFit.fill,),//和屏幕一般高，但会被父级宽度限制，所以需要fit
+
+          Positioned.fill(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX:60, sigmaY:60),
+              child: Container(
+                color: Colors.black.withOpacity(0.2),
+              ),
+            ),
+          ),//背景图叠在下面
+
+          Container(
+            padding: EdgeInsets.only(top: screen.top, left: screen.calc(24), right: screen.calc(24)),
+
+            child: Column(
+              children: [
+                Header(),
+                PlayerInner(),
+                ControlPanel1(),
+                Progress(),
+                ControlPanel2(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

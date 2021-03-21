@@ -10,3 +10,4 @@ AudioPlayer getPlayer(){//每次调用getPlayer方法，检查是否已创建，
 
   return _audioPlayer;
 }
+

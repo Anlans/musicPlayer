@@ -10,8 +10,17 @@ class PlayerInner extends StatelessWidget{
     print(args);
 
     return Container(
-      child: Text('aaa'),
+      child: Stack(
+        children: [
+        ],
+      ),
+
     );
   }
 
 }
+
+
+
+
+
