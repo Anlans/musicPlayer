@@ -60,26 +60,33 @@ class SongList extends StatelessWidget{
             child: Row(children: items.map((item) => Container(
               width: screen.calc(209),
               margin: EdgeInsets.only(left: screen.calc(10), right: screen.calc(10)),
-              child: Column(children: [
-                Container(
-                  width: screen.calc(209),
-                  height: screen.calc(209),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(item['img']),
-                      fit: BoxFit.fill,
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.pushNamed(context, '/player', arguments: {
+                    'id': item['id'],
+                  });
+                },
+                child: Column(children: [
+                  Container(
+                    width: screen.calc(209),
+                    height: screen.calc(209),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(item['img']),
+                        fit: BoxFit.fill,
+                      ),
+                      borderRadius: BorderRadius.circular(screen.calc(10)),
                     ),
-                    borderRadius: BorderRadius.circular(screen.calc(10)),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: screen.calc(12)),
-                  height: screen.calc(64),
-                  child: Text(item['title'], style: TextStyle(
-                    fontSize: screen.calc(24),
-                  ), overflow: TextOverflow.ellipsis, maxLines: 2),
-                ),
-              ]),
+                  Container(
+                    margin: EdgeInsets.only(top: screen.calc(12)),
+                    height: screen.calc(64),
+                    child: Text(item['title'], style: TextStyle(
+                      fontSize: screen.calc(24),
+                    ), overflow: TextOverflow.ellipsis, maxLines: 2),
+                  ),
+                ]),
+              ),
             )).toList())
         ),
       ),

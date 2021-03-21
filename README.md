@@ -154,6 +154,12 @@ square_list banner_slider下面的歌单列表
 
 
 
+uc个人中心
+login个人登陆
+reg注册
+
+
+
 
 
 
