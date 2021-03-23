@@ -41,10 +41,21 @@ class PlayerPage extends StatelessWidget{
               children: [
                 Header(),
                 PlayerInner(playing: false,),
-                ControlPanel1(),
-                Progress(),
-                ControlPanel2(),
+
               ],
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            width: screen.width,
+            child: Container(
+              child: Column(
+                children: [
+                  ControlPanel1(),
+                  Progress(),
+                  ControlPanel2(),
+                ],
+              ),
             ),
           ),
         ],

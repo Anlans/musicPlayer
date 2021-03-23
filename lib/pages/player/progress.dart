@@ -10,7 +10,10 @@ class Progress extends StatelessWidget{
     print(args);
 
     return Container(
-      child: Text('aaa'),
+      height: screen.calc(30),
+      child: Container(
+
+      ),
     );
   }
 
