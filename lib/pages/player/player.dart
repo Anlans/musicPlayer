@@ -23,7 +23,7 @@ class PlayerPage extends StatelessWidget{
     return Scaffold(
       body: Stack(
         children: [//唱片机背景模糊图
-          Image.asset('assets/tmp_cover_1.jpg', height: screen.height, width: screen.width, fit: BoxFit.fill,),//和屏幕一般高，但会被父级宽度限制，所以需要fit
+          Image.asset('assets/tmp_cover_7.jpg', height: screen.height, width: screen.width, fit: BoxFit.fill,),//和屏幕一般高，但会被父级宽度限制，所以需要fit
 
           Positioned.fill(
             child: BackdropFilter(
@@ -40,7 +40,7 @@ class PlayerPage extends StatelessWidget{
             child: Column(
               children: [
                 Header(),
-                PlayerInner(),
+                PlayerInner(playing: false,),
                 ControlPanel1(),
                 Progress(),
                 ControlPanel2(),
