@@ -52,7 +52,7 @@ class PlayerPage extends StatelessWidget{
               child: Column(
                 children: [
                   ControlPanel1(),
-                  Progress(),
+                  Progress(current: 96, total: 568,),
                   ControlPanel2(),
                 ],
               ),
