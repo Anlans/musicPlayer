@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:musicplayer/util/screen_util.dart';
 import 'package:musicplayer/pages/player/header.dart';
 import 'package:musicplayer/pages/player/player_inner.dart';
@@ -10,15 +11,16 @@ import 'package:musicplayer/pages/player/progress.dart';
 import 'package:musicplayer/util/system_util.dart';
 import 'package:musicplayer/util/player_util.dart';
 
-class PlayerPage extends StatelessWidget{
+class PlayerPage extends HookWidget{
   @override
   Widget build(BuildContext context) {
     final screen=Screen(context);
-    final args=ModalRoute.of(context).settings.arguments as Map;
+    // final args=ModalRoute.of(context).settings.arguments as Map;
+    final playing=useState(false);//是否播放状态
 
     setStatusBarStyle(Brightness.light);
 
-    print(args);
+    // print(args);
 
     return Scaffold(
       body: Stack(
@@ -40,7 +42,7 @@ class PlayerPage extends StatelessWidget{
             child: Column(
               children: [
                 Header(),
-                PlayerInner(playing: false,),
+                PlayerInner(playing: playing.value,),//大盘子
 
               ],
             ),
@@ -51,9 +53,34 @@ class PlayerPage extends StatelessWidget{
             child: Container(
               child: Column(
                 children: [
-                  ControlPanel1(),
+                  ControlPanel1(
+                    heart: false,
+                    onDownload: (){
+                      print('down');
+                    },
+                  ),
                   Progress(current: 96, total: 568,),
-                  ControlPanel2(),
+                  ControlPanel2(
+                    playing: playing.value,
+                    onPlayTap: (){
+                      //播放时设为true，图标显示为pause
+                      playing.value=true;
+                    },
+                    onPauseTap: (){
+                      //播放时设为false，图标显示为play
+                      playing.value=false;
+                    },
+
+                    onPlaylist: (){
+                      print('playlist');
+                    },
+                    onBackward: (){
+                      print('back');
+                    },
+                    onForward: (){
+                      print('forward');
+                    },
+                  ),
                 ],
               ),
             ),
