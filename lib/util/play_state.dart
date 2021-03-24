@@ -66,7 +66,7 @@ class _PlayStateProviderState extends State{
   int total;
 
   _PlayStateProviderState({this.child}):super(){//继承自State没有key
-    final player=getPlayer();
+    player=getPlayer();
 
 
     player.onPlayerStateChanged.listen((event) {
