@@ -5,7 +5,7 @@ class Progress extends StatelessWidget{
   final int current;
   final int total;
 
-  Progress({Key key, this.current=0, this.total=1}):super(key: key);
+  Progress({Key key, this.current, this.total}):super(key: key);
   @override
   Widget build(BuildContext context) {
     final screen=Screen(context);
@@ -13,10 +13,20 @@ class Progress extends StatelessWidget{
     // final args=ModalRoute.of(context).settings.arguments as Map;
     // print(args);
 
-    final curTime='${(current~/60).toString().padLeft(2, '0')}:${(current%60).toString().padLeft(2, '0')}';
-    final totalTime='${(total~/60).toString().padLeft(2, '0')}:${(total%60).toString().padLeft(2, '0')}';
+    final curTime=
+        current==null?
+        '--:--':
+        '${(current~/60).toString().padLeft(2, '0')}:${(current%60).toString().padLeft(2, '0')}';
 
-    final curWidth=screen.calc((W-40)*current/total);//白条宽度
+    final totalTime=
+        total==null?
+        '--:--':
+        '${(total~/60).toString().padLeft(2, '0')}:${(total%60).toString().padLeft(2, '0')}';
+
+    double curWidth=//给一个double
+      (current==null||total==null||total==0)?
+      0:
+      screen.calc((W-40)*current/total);//白条宽度
 
 
     return Container(

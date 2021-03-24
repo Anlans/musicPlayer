@@ -9,18 +9,18 @@ import 'package:musicplayer/pages/player/control_panel1.dart';
 import 'package:musicplayer/pages/player/control_panel2.dart';
 import 'package:musicplayer/pages/player/progress.dart';
 import 'package:musicplayer/util/system_util.dart';
-import 'package:musicplayer/util/player_util.dart';
+import 'package:musicplayer/util/play_state.dart';
 
-class PlayerPage extends HookWidget{
+class PlayerPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final screen=Screen(context);
     // final args=ModalRoute.of(context).settings.arguments as Map;
-    final playing=useState(false);//是否播放状态
+    final playState=PlayState.of(context);
+    // final playing=useState(false);//是否播放状态
+    // final player=getPlayer();//对player做实例
 
     setStatusBarStyle(Brightness.light);
-
-    // print(args);
 
     return Scaffold(
       body: Stack(
@@ -42,7 +42,7 @@ class PlayerPage extends HookWidget{
             child: Column(
               children: [
                 Header(),
-                PlayerInner(playing: playing.value,),//大盘子
+                PlayerInner(playing: playState.playing,),//大盘子
 
               ],
             ),
@@ -59,16 +59,18 @@ class PlayerPage extends HookWidget{
                       print('down');
                     },
                   ),
-                  Progress(current: 96, total: 568,),
+                  Progress(
+                    current: playState.current!=null?playState.current:null,
+                    total: playState.total!=null?playState.total:null,),
                   ControlPanel2(
-                    playing: playing.value,
+                    playing: playState.playing,
                     onPlayTap: (){
+                      playState.player.play('http://aq.webturing.com/wp-content/uploads/2021/03/tstMusic.mp3');
                       //播放时设为true，图标显示为pause
-                      playing.value=true;
                     },
                     onPauseTap: (){
+                      playState.player.pause();
                       //播放时设为false，图标显示为play
-                      playing.value=false;
                     },
 
                     onPlaylist: (){

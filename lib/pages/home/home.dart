@@ -9,7 +9,6 @@ import 'package:musicplayer/pages/square/square.dart';
 import 'package:musicplayer/widgets/song_list.dart';
 import 'package:musicplayer/widgets/recommend_list.dart';
 import 'package:musicplayer/widgets/global_navigation_bar.dart';
-import 'package:musicplayer/util/player_util.dart';
 
 const songList1=[       //歌单信息
   {'id': '43423', 'img': 'assets/tmp_cover_1.jpg', 'count': '9亿', 'title': '[华语新歌] 最新华语音乐专辑'},

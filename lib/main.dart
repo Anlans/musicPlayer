@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:musicplayer/router.dart';
 import 'package:musicplayer/util/system_util.dart';
-
-class PlayerWidget extends InheritedWidget{
-  @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
-
-  }
-
-}
+import 'package:musicplayer/util/play_state.dart';
 
 void main() {
-  runApp(App());
-
+  runApp(PlayStateProvider(
+    child: App(),
+  ));
   setStatusBarStyle(Brightness.light);
 }
 
