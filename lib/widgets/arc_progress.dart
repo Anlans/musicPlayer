@@ -77,7 +77,6 @@ class _ArcPainter extends CustomPainter{//属于绘图的命令
     paint.strokeWidth=width;
     paint.color=color;
     paint.strokeCap=StrokeCap.round;//两端圆头
-    paint.strokeCap=StrokeCap.butt;
 
 
 
