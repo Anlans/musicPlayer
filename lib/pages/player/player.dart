@@ -3,13 +3,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:musicplayer/util/screen_util.dart';
+import 'package:musicplayer/util/play_state.dart';
+import 'package:musicplayer/util/system_util.dart';
+
 import 'package:musicplayer/pages/player/header.dart';
 import 'package:musicplayer/pages/player/player_inner.dart';
 import 'package:musicplayer/pages/player/control_panel1.dart';
 import 'package:musicplayer/pages/player/control_panel2.dart';
 import 'package:musicplayer/pages/player/progress.dart';
-import 'package:musicplayer/util/system_util.dart';
-import 'package:musicplayer/util/play_state.dart';
+import 'package:musicplayer/pages/player/play_list.dart';
 
 class PlayerPage extends StatelessWidget{
   @override
@@ -72,15 +74,14 @@ class PlayerPage extends StatelessWidget{
                       playState.player.pause();
                       //播放时设为false，图标显示为play
                     },
-
-                    onPlaylist: (){
-                      print('playlist');
-                    },
                     onBackward: (){
                       print('back');
                     },
                     onForward: (){
                       print('forward');
+                    },
+                    onPlaylist: (){
+                      showPlayList(context);
                     },
                   ),
                 ],
