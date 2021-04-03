@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:musicplayer/pages/home/home.dart';
 import 'package:musicplayer/util/screen_util.dart';
+
+import '../main.dart';
 
 
 typedef PlayCallBack=void Function(String);
@@ -13,6 +16,8 @@ class RecommendList extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    getSongDetail();
+    // print('-----------------------recommendList1_Img: ${recommendList1[0]['img']}');
     final screen=Screen(context);
 
     return Container(
@@ -135,7 +140,7 @@ class _Item extends StatelessWidget{
             height: screen.calc(120),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(data['img']),       //注意data的传参
+                image: NetworkImage(data['img']),       //注意data的传参
                 fit: BoxFit.fill,
               ),
             ),
@@ -148,14 +153,31 @@ class _Item extends StatelessWidget{
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,//文字上下两行居左
                 children: [
-                  Text.rich(
-                   TextSpan(children: [
-                     TextSpan(text: '${data['title']}'),//传入歌名
-                     TextSpan(text: ' - ${data['artist']}', style: TextStyle(//传入歌手
-                       color: Color(0xff9a9a9a),
-                     )),
-                   ])
+                  // Text.rich(
+                  //  TextSpan(children: [
+                  //    TextSpan(text: '${data['title']}'),//传入歌名
+                  //    TextSpan(text: ' - ${data['artist']}', style: TextStyle(//传入歌手
+                  //      color: Color(0xff9a9a9a),
+                  //    )),
+                  //  ])
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     Container(
+                  //       margin: EdgeInsets.only(left: screen.calc(2)),
+                  //       child: Text('${data['title']}', overflow: TextOverflow.ellipsis, maxLines: 1),
+                  //     ),
+                  //     Container(
+                  //       margin: EdgeInsets.only(left: screen.calc(2)),
+                  //       child: Text(' - ${data['artist']}', style: TextStyle(color: Color(0xff9a9a9a)), overflow: TextOverflow.ellipsis, maxLines: 1,),
+                  //     ),
+                  //   ],
+                  // ),
+                  Container(
+                    margin: EdgeInsets.only(left: screen.calc(2)),
+                    child: Text('${data['title']} - ${data['artist']}', overflow: TextOverflow.ellipsis, maxLines: 1),
                   ),
+
 
                   Row(
                     children: [
@@ -169,7 +191,7 @@ class _Item extends StatelessWidget{
                       ),
                       Container(
                         margin: EdgeInsets.only(left: screen.calc(8)),
-                        child: Text(data['tip'], style: TextStyle(color: Color(0xff9a9a9a)),),
+                        child: Text(data['tip'], style: TextStyle(color: Color(0xff9a9a9a)), overflow: TextOverflow.ellipsis, maxLines: 1),
                       ),
                     ],
                   ),

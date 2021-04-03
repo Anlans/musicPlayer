@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:musicplayer/util/screen_util.dart';
+import 'package:musicplayer/pages/home/home.dart';
 
 class PlayerInner extends HookWidget{
   final bool playing;//判断唱针是否要动
@@ -43,7 +44,7 @@ class PlayerInner extends HookWidget{
                     Center(
                       child: Container(
                         color: Colors.black,//图片不够大则用剩下的black填充空白唱盘
-                        child: Image.asset('assets/tmp_cover_7.jpg', width: screen.calc(400), height: screen.calc(400),),
+                        child: Image.network(recommendList1[cnt]['img'], width: screen.calc(400), height: screen.calc(400),),
                       ),
                     ),
                     //唱片

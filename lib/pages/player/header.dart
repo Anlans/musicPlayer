@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musicplayer/util/screen_util.dart';
+import 'package:musicplayer/pages/home/home.dart';
 
 class Header extends StatelessWidget{
   @override
@@ -26,14 +27,14 @@ class Header extends StatelessWidget{
               padding: EdgeInsets.only(top: screen.calc(20)),
               child: Column(
                 children: [
-                  Text('Somewhere only We know', style: TextStyle(color: Colors.white, fontSize: screen.calc(30), fontWeight: FontWeight.w700),),
+                  Text(recommendList1[cnt]['title'], style: TextStyle(color: Colors.white, fontSize: screen.calc(30), fontWeight: FontWeight.w700), overflow: TextOverflow.ellipsis, maxLines: 1,),
                   Padding(
                     padding: EdgeInsets.only(top: screen.calc(4)),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Keane', style: TextStyle(color: Color(0x99ffffff)),),
+                      Text(recommendList1[cnt]['artist'], style: TextStyle(color: Color(0x99ffffff), fontSize: screen.calc(20)), overflow: TextOverflow.ellipsis, maxLines: 1,),
                       Image.asset('assets/icon-right-arrow-w.png', width: screen.calc(20), height: screen.calc(20),),
                     ],
                   ),

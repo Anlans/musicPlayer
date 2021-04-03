@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:musicplayer/util/global.dart';
+import 'package:musicplayer/util/request.dart';
 import 'package:musicplayer/util/screen_util.dart';
 import 'package:musicplayer/util/system_util.dart';
 import 'package:musicplayer/pages/home/header.dart';
@@ -9,23 +11,29 @@ import 'package:musicplayer/pages/square/square.dart';
 import 'package:musicplayer/widgets/song_list.dart';
 import 'package:musicplayer/widgets/recommend_list.dart';
 import 'package:musicplayer/widgets/global_navigation_bar.dart';
+import 'package:musicplayer/pages/player/play_list.dart';
 
-const songList1=[       //歌单信息
-  {'id': '43423', 'img': 'assets/tmp_cover_1.jpg', 'count': '9亿', 'title': '[华语新歌] 最新华语音乐专辑'},
-  {'id': '666', 'img': 'assets/tmp_cover_2.jpg', 'count': '34.9亿', 'title': '今天从<Titan>听起|私人雷达'},
-  {'id': '231', 'img': 'assets/tmp_cover_3.jpg', 'count': '5335', 'title': '[美语新歌]'},
-  {'id': '333', 'img': 'assets/tmp_cover_4.jpg', 'count': '19万', 'title': '[韩语新歌]'},
-  {'id': '788', 'img': 'assets/tmp_cover_5.jpg', 'count': '3232', 'title': '[日语新歌]'},
-  {'id': '344', 'img': 'assets/tmp_cover_6.jpg', 'count': '20亿亿', 'title': '[泰语新歌]'},
+int cnt=0;//掌握每首歌的状态，是否切歌，当前歌曲的图片及其歌名，作者
+var aaa;
+
+var songList1=[       //歌单信息
+  {'id': '5315249487', 'img': 'http://p4.music.126.net/8sdYwsOfLA_3ciiuVHo0rQ==/109951165498690725.jpg', 'count': '9亿', 'title': '住在梦里的人，以后也要住进心里'},
+  {'id': '2819914042', 'img': 'http://p4.music.126.net/nF_DRM-v5pEo-4n1brpM5w==/109951165845493667.jpg', 'count': '34.9亿', 'title': '[一周日语上新] 催眠麦克风最新对决曲 动感活力的视听盛宴'},
+  {'id': '6677014498', 'img': 'http://p3.music.126.net/Qf3JhZed8Kb6h4L6Lw5yFg==/109951165830962378.jpg', 'count': '5335', 'title': '弱者才会一蹶不振，我要逆风翻盘！'},
+  {'id': '5137936188', 'img': 'http://p3.music.126.net/FNUk4SzH0iVCC3J571vSDw==/109951165338007405.jpg', 'count': '19万', 'title': '治愈轻音 | 让心中无事，如清水长流'},
+  {'id': '6656095670', 'img': 'http://p3.music.126.net/1YDNWkIy_9GiIy7Kc_TsNw==/109951165796917206.jpg', 'count': '3232', 'title': '攒满想念值，换一次见面好不好'},
+  {'id': '5377296264', 'img': 'http://p4.music.126.net/xV4sUkFfgiLU85MhD2aROw==/109951165597483922.jpg', 'count': '20亿亿', 'title': 'Lofi/复古/一场听觉盛宴'},
 ];
 
-const recommendList1=[  //推荐列表歌曲信息
-  {'id':'1111', 'img': 'assets/tmp_cover_1.jpg', 'title': 'Tempest', 'artist': 'Capo　Productions', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
-  {'id':'1111', 'img': 'assets/tmp_cover_2.jpg', 'title': '岁月神偷', 'artist': '金玟岐', 'tip':'于吾却尽是沙漠'},
-  {'id':'1111', 'img': 'assets/tmp_cover_3.jpg', 'title': '最美的期待', 'artist': '周笔畅', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
-  {'id':'1111', 'img': 'assets/tmp_cover_4.jpg', 'title': 'Tempest', 'artist': 'Capo　Productions', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
-  {'id':'1111', 'img': 'assets/tmp_cover_5.jpg', 'title': 'Tempest', 'artist': 'Capo　Productions', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
-  {'id':'1111', 'img': 'assets/tmp_cover_6.jpg', 'title': 'Tempest', 'artist': 'Capo　Productions', 'tip':'眸中衍生星辰 于吾却尽是沙漠'},
+var recommendList1=[  //推荐列表歌曲信息
+  {'id':'1827600686', 'img': 'http://p3.music.126.net/K99_XfgglMlcTqJvkSE7aA==/18763165929885302.jpg', 'title': '还是会想你', 'artist': '林达浪', 'tip':'还是会想你'},
+  {'id':'1377053293', 'img': 'http://p3.music.126.net/pBI3QDlNCURn_dShKKzOmQ==/109951164204208497.jpg', 'title': '山海皆可平', 'artist': 'CMJ', 'tip':'山海皆可平'},
+  {'id':'1384026889', 'img': 'http://p4.music.126.net/M34HFzLO2xhDLuX_zEALKA==/109951164291347934.jpg', 'title': '所念皆星河', 'artist': 'CMJ', 'tip':'告白実行委員会'},
+
+  {'id':'1832573261', 'img': 'http://p4.music.126.net/mgbTU1J-ilSmeO6I-NHi7g==/109951165834914177.jpg', 'title': 'Dance With Me', 'artist': "SHE'S", 'tip':'Groovin'},
+  {'id':'1824415848', 'img': 'http://p4.music.126.net/W9rGvRP3j-qICdS4OuE38w==/109951165774446145.jpg', 'title': 'Phenomena', 'artist': 'Shingo Nakamura', 'tip':'Phenomena'},
+  {'id':'1833379103', 'img': 'http://p3.music.126.net/fjtfUFKKXhHFQcsNcga7Lw==/109951165845178824.jpg', 'title': 'Pick N Choose', 'artist': 'JP THE WAVY', 'tip':'WAVY TAPE 2'},
+
 ];
 
 
@@ -76,4 +84,86 @@ class HomePage extends StatelessWidget {
     );
   }
 
+}
+
+void getSongListDetail()async{//拿到歌单每首歌的数据,重置recommendList1
+  int loc=0;
+  getSongList();
+  final response =
+    await DioUtil.getInstance().post("$API_PREFIX/playlist/detail?id=${songList1[0]['id']}", {});
+  final data=response.data;
+  // var aaaaa=data['playlist']['tracks'];
+
+  for(int i=0; i<6; i++) {
+    // if(loc<8){
+      int sgListDetailSongId = data['playlist']['tracks'][loc]['id'];
+      print('================RESET1==============loc: $loc');
+      String sgLDSId = sgListDetailSongId.toString();
+      String sgListDetailSongName = data['playlist']['tracks'][loc]['name'];
+      print('================RESET2==============loc: $loc');
+      String sgListDetailSongArtist = data['playlist']['tracks'][loc]['ar'][0]['name'];
+      print('================RESET3==============loc: $loc');
+      String sgListDetailSongImg = data['playlist']['tracks'][loc]['al']['picUrl'];
+      print('================RESET4==============loc: $loc');
+      String sgListDetailSongTip=data['playlist']['tracks'][loc]['al']['name'];
+      print('================RESET4==============loc: $loc');
+
+
+      recommendList1[i]['id']=sgLDSId;
+      recommendList1[i]['img']=sgListDetailSongImg;
+      recommendList1[i]['title']=sgListDetailSongName;
+      recommendList1[i]['artist']=sgListDetailSongArtist;
+      recommendList1[i]['tip']=sgListDetailSongTip;
+      print('=============loc: $loc');
+
+      loc++;//不可直接在数组中使用++，否则会 歌曲id对应其作者artist等数据不匹配
+    // }else{
+    //   loc=0;
+
+      print('================RESET==============loc: $loc');
+    // }
+  }
+}
+
+void getSongList()async{
+  var loc=0;
+  final response =
+    await DioUtil.getInstance().post("$API_PREFIX/top/playlist?limit=100&order=hot", {});
+  final data=response.data;
+
+  for(var i=0; i<6; i++) {
+    if(loc<6) {
+      int sgListId = data['playlists'][loc]['id'];
+      String sgListId1 = sgListId.toString();
+      String sgListImg = data['playlists'][loc]['coverImgUrl'];
+      String sgListName = data['playlists'][loc]['name'];
+
+      songList1[i]['img']=sgListImg;
+      songList1[i]['id']=sgListId1;
+      songList1[i]['title']=sgListName;
+
+      loc++;
+    }else{
+      loc=0;
+    }
+  }
+}
+
+void getSongDetail()async{
+  getSongList();
+  getSongListDetail();
+  // final response =
+  //   await DioUtil.getInstance().post("$API_PREFIX/song/detail?ids=${recommendList1[0]['id']}", {});
+  //
+  // final data = response.data;
+  // String imgUrl=data['songs'][0]['al']['picUrl'];
+  // print('--------------imgUrl: $imgUrl');
+
+  // recommendList1[1]['img']=imgUrl;
+  // {'id': '5315249487', 'img': 'http://p4.music.126.net/8sdYwsOfLA_3ciiuVHo0rQ==/109951165498690725.jpg', 'count': '9亿', 'title': '住在梦里的人，以后也要住进心里'},
+  // {'id': '2819914042', 'img': 'http://p4.music.126.net/nF_DRM-v5pEo-4n1brpM5w==/109951165845493667.jpg', 'count': '34.9亿', 'title': '[一周日语上新] 催眠麦克风最新对决曲 动感活力的视听盛宴'},
+  // {'id': '6677014498', 'img': 'http://p3.music.126.net/Qf3JhZed8Kb6h4L6Lw5yFg==/109951165830962378.jpg', 'count': '5335', 'title': '弱者才会一蹶不振，我要逆风翻盘！'},
+  // {'id': '5137936188', 'img': 'http://p3.music.126.net/FNUk4SzH0iVCC3J571vSDw==/109951165338007405.jpg', 'count': '19万', 'title': '治愈轻音 | 让心中无事，如清水长流'},
+  // {'id': '6656095670', 'img': 'http://p3.music.126.net/1YDNWkIy_9GiIy7Kc_TsNw==/109951165796917206.jpg', 'count': '3232', 'title': '攒满想念值，换一次见面好不好'},
+  // {'id': '5377296264', 'img': 'http://p4.music.126.net/xV4sUkFfgiLU85MhD2aROw==/109951165597483922.jpg', 'count': '20亿亿', 'title': 'Lofi/复古/一场听觉盛宴'},
 }

@@ -72,21 +72,21 @@ class _PlayStateProviderState extends State{
     player.onPlayerStateChanged.listen((event) {
 
       setState(() {//保持播放状态更新正常
-        print(event);
+        // print(event);
         playing=event==AudioPlayerState.PLAYING;
       });
     });//关心播放状态是否变化
     player.onAudioPositionChanged.listen((event) {
       setState(() {
-        print('current: ${event.inSeconds}');
+        // print('current: ${event.inSeconds}');
         current=event.inSeconds;
       });
-      print(event);
+      // print(event);
     });//关注当前的时间
 
     player.onDurationChanged.listen((event) {
       setState(() {
-        print('total: ${event.inSeconds}');
+        // print('total: ${event.inSeconds}');
         total=event.inSeconds;
       });
     });//时长变化，关于是否加载，切歌

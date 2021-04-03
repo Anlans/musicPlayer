@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:musicplayer/pages/home/home.dart';
 import 'package:musicplayer/util/screen_util.dart';
+import '../main.dart';
 
 
 class SongList extends StatelessWidget{
@@ -11,6 +13,9 @@ class SongList extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    // getSongList();//直接放到Category()调用，这样才可以直接更新歌单精选站的数据
+    // getSongDetail();
+    print('-----------------Song: ${songList1[0]['img']}');
     final screen=Screen(context);
 
     return Column(children: [
@@ -72,7 +77,7 @@ class SongList extends StatelessWidget{
                     height: screen.calc(209),
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(item['img']),
+                        image: NetworkImage(item['img']),
                         fit: BoxFit.fill,
                       ),
                       borderRadius: BorderRadius.circular(screen.calc(10)),

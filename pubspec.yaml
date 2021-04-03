@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_hooks: ^0.14.0
+  flutter_hooks: ^0.16.0
 
   flutter_redux_hooks: ^0.1.1
 
@@ -21,6 +21,21 @@ dependencies:
   cupertino_icons: ^1.0.0
 
   audioplayers: ^0.16.1
+
+  #使用API所用到的框架 START
+  dio_cookie_manager: 2.0.0
+
+  cookie_jar: 3.0.0
+
+  path_provider: ^1.0.0
+
+  dio: ^4.0.0
+
+  shared_preferences: 0.5.4+5
+
+  #使用API所用到的框架 END
+
+
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +67,7 @@ flutter:
     - assets/tmp_cover_5.jpg
     - assets/tmp_cover_6.jpg
     - assets/tmp_cover_7.jpg
+    - assets/tmp_cover_8.png
     - assets/icon-group.png
     - assets/icon-group-b.png
     - assets/icon-music.png

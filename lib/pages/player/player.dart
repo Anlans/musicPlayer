@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:musicplayer/util/global.dart';
+import 'package:musicplayer/util/request.dart';
 import 'package:musicplayer/util/screen_util.dart';
 import 'package:musicplayer/util/play_state.dart';
 import 'package:musicplayer/util/system_util.dart';
@@ -12,10 +14,18 @@ import 'package:musicplayer/pages/player/control_panel1.dart';
 import 'package:musicplayer/pages/player/control_panel2.dart';
 import 'package:musicplayer/pages/player/progress.dart';
 import 'package:musicplayer/pages/player/play_list.dart';
+import 'package:musicplayer/pages/home/home.dart';
+
+//res只有设置为全局变量才可以在点击切歌的时候同步更改，这样在暂停时再次点击播放按钮时会继续当前歌曲的播放，而不会继续播放默认歌曲
+// var res='https://music.163.com/song/media/outer/url?id=33894312.mp3';
+var res=recommendList1[0]['id'];
+final length=recommendList1.length;
 
 class PlayerPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+
+
     final screen=Screen(context);
     // final args=ModalRoute.of(context).settings.arguments as Map;
     final playState=PlayState.of(context);
@@ -27,7 +37,7 @@ class PlayerPage extends StatelessWidget{
     return Scaffold(
       body: Stack(
         children: [//唱片机背景模糊图
-          Image.asset('assets/tmp_cover_7.jpg', height: screen.height, width: screen.width, fit: BoxFit.fill,),//和屏幕一般高，但会被父级宽度限制，所以需要fit
+          Image.network(recommendList1[cnt]['img'], height: screen.height, width: screen.width, fit: BoxFit.fill,),//和屏幕一般高，但会被父级宽度限制，所以需要fit
 
           Positioned.fill(
             child: BackdropFilter(
@@ -66,19 +76,45 @@ class PlayerPage extends StatelessWidget{
                     total: playState.total!=null?playState.total:null,),
                   ControlPanel2(
                     playing: playState.playing,
-                    onPlayTap: (){
-                      playState.player.play('http://aq.webturing.com/wp-content/uploads/2021/03/tstMusic.mp3');
+                    onPlayTap: ()async{
+                      // var id='1827600686';
+                      // var res=await getSgUrl(id);
+                      print(res);
+
+                      playState.player.play(res);
+                      print('-----------------------cnt: $cnt');
+                      print('onPlayTap');
                       //播放时设为true，图标显示为pause
                     },
-                    onPauseTap: (){
+                    onPauseTap: ()async{
                       playState.player.pause();
                       //播放时设为false，图标显示为play
                     },
-                    onBackward: (){
-                      print('back');
+                    onBackward: ()async{
+                      if(cnt>0) {
+                        cnt--;
+                        var id = recommendList1[cnt]['id'];
+                        print('------id: $id');
+                        res = await getSgUrl(id);
+                        print('--------------------------');
+                        print('res: $res');
+                        playState.player.play(res);
+                        print('back');
+                      }else{
+                        cnt=length-1;
+                      }
                     },
-                    onForward: (){
-                      print('forward');
+                    onForward: ()async{
+                      if(cnt<length-1) {
+                        cnt++;
+                        print('----------cnt: $cnt');
+                        var id=recommendList1[cnt]['id'];
+                        res = await getSgUrl(id);
+                        playState.player.play(res);
+                        print('forward');
+                      }else{
+                        cnt=1;//回撤至1而不是0，避免到onBackward时爆栈
+                      }
                     },
                     onPlaylist: (){
                       showPlayList(context);
@@ -94,3 +130,79 @@ class PlayerPage extends StatelessWidget{
   }
 
 }
+
+
+getSgUrl(String id) async {
+
+  final response = await DioUtil.getInstance()
+      .post("$API_PREFIX/song/url?id=$id&br=320000", {});
+  final data = response.data;
+  // print('**************************');
+  // print('data: ${data.toString()}');
+  // print('**************************');
+  String url = data['data'][0]['url'];
+  // url = 'https${url.split('http')[1]}';
+
+  print('**************************');
+  print('data: ${url.toString()}');
+  print('**************************');
+
+  return url;
+
+}
+
+
+
+// playState.player.play(musicBase[cnt++]['url']);
+List<Map<String, dynamic>> musicBase = <Map<String, dynamic>>[
+  {
+    'name': '无归',
+    'artists': '叶里',
+    'url': 'https://music.163.com/song/media/outer/url?id=404465743.mp3',
+    "img1v1Url": "https://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+    'like': false
+  },
+  {
+    'name': '扉をあけて',
+    'artists': 'ANZA',
+    'url': 'https://music.163.com/song/media/outer/url?id=555959.mp3',
+    "img1v1Url": "https://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+    'like': false
+  },
+  {
+    'name': 'Past The Stargazing Season',
+    'artists': 'Mili',
+    'url': 'https://music.163.com/song/media/outer/url?id=29401202.mp3',
+    "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+    'like': false
+  },
+  {
+    'name': '扉をあけて',
+    'artists': 'ANZA',
+    'url': 'https://music.163.com/song/media/outer/url?id=1823305772.mp3',
+    "img1v1Url": "https://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+    'like': false
+  },
+  {
+    'name': '扉をあけて',
+    'artists': 'ANZA',
+    'url': 'https://music.163.com/song/media/outer/url?id=1828102809.mp3',
+    "img1v1Url": "https://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+    'like': false
+  },
+  {
+    'name': '扉をあけて',
+    'artists': 'ANZA',
+    'url': 'https://music.163.com/song/media/outer/url?id=1374083992.mp3',
+    "img1v1Url": "https://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+    'like': false
+  },
+  {
+    'name': '扉をあけて',
+    'artists': 'ANZA',
+    'url': 'https://music.163.com/song/media/outer/url?id=1460319077.mp3',
+    "img1v1Url": "https://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+    'like': false
+  },
+
+];
