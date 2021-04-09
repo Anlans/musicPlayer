@@ -7,15 +7,24 @@ import 'package:musicplayer/pages/login/login_4.dart';
 import 'package:musicplayer/pages/login/login_5.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class LoginPage extends HookWidget{
+class LoginPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    final step=useState(1);
+    final args=ModalRoute.of(context).settings.arguments;//用路由的参数来传递
+    var step=1;
+    if(args!=null){//没参数就统一按照1算，否则按照传值来走
+      step=(args as Map)['step'];
+    }
+
     final steps={
       1: Login1(//此处不用路由，只用换组件的方式
         onLogin: (){
-          step.value++;//进入Login2
+          // step.value++;//进入Login2
+          Navigator.pushNamed(context, '/login', arguments: {
+            'step': 2,
+          });
         },
+
         onCancel: (){},
         onWechat: (){},
         onQQ: (){},
@@ -23,9 +32,25 @@ class LoginPage extends HookWidget{
         onApple: (){},
         onEasy: (){},
       ),
-      2: Login2(),
+      2: Login2(onNext: (area, phone){
+        // print(area);
+        // print(phone);
+        Navigator.pushNamed(context, '/login', arguments: {
+          'step': 3,
+        });
+      },),
+      3: Login3(
+        onFinished: (code){
+          print(code);
+
+          Navigator.pushNamed(context, '/login', arguments: {
+            'step': 4,
+          });
+        },
+      ),//跳到验证码验证
+      4: Login4(),
     };
 
-    return steps[step.value];//找当前为第几步
+    return steps[step];//找当前为第几步
   }
 }

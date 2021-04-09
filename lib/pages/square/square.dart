@@ -34,7 +34,7 @@ class SquarePage extends HookWidget {
 
     setStatusBarStyle(Brightness.light);
 
-    print(args);
+    // print(args);
 
     return Scaffold(
       body: SingleChildScrollView(

@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:musicplayer/util/screen_util.dart';
+import 'package:musicplayer/widgets/round_flat_button.dart';
 
 class Login1 extends StatelessWidget{
   final VoidCallback onLogin;
@@ -56,7 +57,7 @@ class Login1 extends StatelessWidget{
                     margin: EdgeInsets.only(top: screen.calc(202)),
                     child: Column(
                       children: [
-                        _Button(
+                        RoundFlatButton(
                           child: Text('手机号登录', style: TextStyle(
                             color: Color(0xffea4d44),
                             fontSize: screen.calc(32),
@@ -71,7 +72,7 @@ class Login1 extends StatelessWidget{
                           height: screen.calc(36),
                         ),
 
-                        _Button(
+                        RoundFlatButton(
                           outline: true,
                           child: Text('立即体验', style: TextStyle(
                             color: Colors.white,
@@ -133,7 +134,7 @@ class Login1 extends StatelessWidget{
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: screen.calc(10), right: screen.calc(10)),
-                    child: _Button(
+                    child: RoundFlatButton(
                       child: Image.asset('assets/icon-wechat.png'),
                       bgColor: Colors.white,
                       width: screen.calc(72),
@@ -144,7 +145,7 @@ class Login1 extends StatelessWidget{
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: screen.calc(10), right: screen.calc(10)),
-                    child: _Button(
+                    child: RoundFlatButton(
                       child: Image.asset('assets/icon-qq.png'),
                       bgColor: Colors.white,
                       width: screen.calc(72),
@@ -155,7 +156,7 @@ class Login1 extends StatelessWidget{
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: screen.calc(10), right: screen.calc(10)),
-                    child: _Button(
+                    child: RoundFlatButton(
                       child: Image.asset('assets/icon-weibo.png'),
                       bgColor: Colors.white,
                       width: screen.calc(72),
@@ -166,7 +167,7 @@ class Login1 extends StatelessWidget{
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: screen.calc(10), right: screen.calc(10)),
-                    child: _Button(
+                    child: RoundFlatButton(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -187,7 +188,7 @@ class Login1 extends StatelessWidget{
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: screen.calc(10), right: screen.calc(10)),
-                    child: _Button(
+                    child: RoundFlatButton(
                       child: Image.asset('assets/icon-easy.png'),
                       bgColor: Colors.white,
                       width: screen.calc(72),
@@ -206,81 +207,6 @@ class Login1 extends StatelessWidget{
   }
 }
 
-class _Button extends StatelessWidget{
-  final Color color;
-  final Color bgColor;
-  final String title;
-  final Widget child;
-  final bool outline;
-  final num height;
-  final num width;
-  final EdgeInsets padding;
-  final onTap;
-
-  _Button({
-    Key key,
-    this.color=Colors.black,
-    this.bgColor=Colors.white,
-    this.title,
-    this.outline=false,
-    this.child,
-    this.width=100.0,
-    this.height=100.0,
-    this.padding,
-    this.onTap,
-  }):super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final screen=Screen(context);
-    print(this.child);
-
-    assert(this.child==null || title==null);
-
-    Widget child;
-
-    if(this.child==null){
-      child=Text(
-        title,
-        style: TextStyle(
-          color: color,
-        ),
-      );
-    }else{
-      child=this.child;
-    }
-
-    final shape=RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(height/2),
-    );
-    var button;
-
-    if(outline){
-      button=OutlineButton(
-        shape: shape,
-        borderSide: BorderSide(color: color, width: 2),
-        highlightedBorderColor: color,
-        child: child,
-        padding: padding,
-        onPressed: onTap,
-      );
-    }else{
-      button=FlatButton(
-        shape: shape,
-        color: bgColor,
-        child: child,
-        padding: padding,
-        onPressed: onTap,
-      );
-    }
-
-    return SizedBox(
-      width: width,
-      height: height,
-      child: button,
-    );
-  }
-}
 
 
 
