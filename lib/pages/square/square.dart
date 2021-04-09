@@ -8,6 +8,7 @@ import 'package:musicplayer/pages/square/header.dart';
 import 'package:musicplayer/pages/square/category.dart';
 import 'package:musicplayer/pages/square/square_list.dart';
 import 'package:musicplayer/pages/square/banner_slider.dart';
+import 'package:musicplayer/pages/home/home.dart';
 
 const categoryItems=[
   {'id': 0, 'title': '推荐', 'color': null},
@@ -22,24 +23,6 @@ const categoryItems=[
   {'id': 9, 'title': 'b', 'color': null},
   {'id': 10, 'title': 'c', 'color': null},
   {'id': 11, 'title': 'd', 'color': null},
-];
-
-const listItems=[
-  {'id':11, 'img':'assets/tmp_cover_1.jpg', 'title': '钢琴摇滚 | 浪子赠予诗人的一纸情书'},
-  {'id':12, 'img':'assets/tmp_cover_2.jpg', 'title': '夏天悄悄过去'},
-  {'id':13, 'img':'assets/tmp_cover_3.jpg', 'title': '夏天悄悄过去'},
-
-  {'id':14, 'img':'assets/tmp_cover_4.jpg', 'title': '夏天悄悄过去'},
-  {'id':15, 'img':'assets/tmp_cover_5.jpg', 'title': '夏天悄悄过去'},
-  {'id':16, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
-
-  {'id':17, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
-  {'id':18, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
-  {'id':19, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
-
-  {'id':20, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
-  {'id':21, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
-  {'id':22, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
 ];
 
 class SquarePage extends HookWidget {

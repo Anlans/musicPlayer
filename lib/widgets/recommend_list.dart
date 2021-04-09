@@ -16,7 +16,7 @@ class RecommendList extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    getSongDetail();
+    // getSongDetail();
     // print('-----------------------recommendList1_Img: ${recommendList1[0]['img']}');
     final screen=Screen(context);
 

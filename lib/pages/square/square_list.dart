@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musicplayer/util/screen_util.dart';
+import 'package:musicplayer/pages/home/home.dart';
 
 
 
@@ -10,6 +11,7 @@ class SquareList extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    // getSongListSquare();
     final screen=Screen(context);
     // print(items.length);
     final rows=[];
@@ -34,7 +36,7 @@ class SquareList extends StatelessWidget{
                 height: screen.calc(300),
                 child: Column(
                   children: [
-                    Image.asset(
+                    Image.network(
                       item['img'],
                       width: screen.calc(214),
                       height: screen.calc(214),

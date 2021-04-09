@@ -91,30 +91,30 @@ class PlayerPage extends StatelessWidget{
                       //播放时设为false，图标显示为play
                     },
                     onBackward: ()async{
-                      if(cnt>0) {
-                        cnt--;
-                        var id = recommendList1[cnt]['id'];
-                        print('------id: $id');
-                        res = await getSgUrl(id);
-                        print('--------------------------');
-                        print('res: $res');
-                        playState.player.play(res);
-                        print('back');
-                      }else{
-                        cnt=length-1;
-                      }
+                      // if(cnt>0) {
+                      //   cnt--;
+                      //   var id = recommendList1[cnt]['id'];
+                      //   print('------id: $id');
+                      //   res = await getSgUrl(id);
+                      //   print('--------------------------');
+                      //   print('res: $res');
+                      //   playState.player.play(res);
+                      //   print('back');
+                      // }else{
+                      //   cnt=length-1;
+                      // }
                     },
                     onForward: ()async{
-                      if(cnt<length-1) {
-                        cnt++;
-                        print('----------cnt: $cnt');
-                        var id=recommendList1[cnt]['id'];
-                        res = await getSgUrl(id);
-                        playState.player.play(res);
-                        print('forward');
-                      }else{
-                        cnt=1;//回撤至1而不是0，避免到onBackward时爆栈
-                      }
+                      // if(cnt<length-1) {
+                      //   cnt++;
+                      //   print('----------cnt: $cnt');
+                      //   var id=recommendList1[cnt]['id'];
+                      //   res = await getSgUrl(id);
+                      //   playState.player.play(res);
+                      //   print('forward');
+                      // }else{
+                      //   cnt=1;//回撤至1而不是0，避免到onBackward时爆栈
+                      // }
                     },
                     onPlaylist: (){
                       showPlayList(context);
@@ -141,9 +141,12 @@ getSgUrl(String id) async {
   // print('data: ${data.toString()}');
   // print('**************************');
   String url = data['data'][0]['url'];
-  // url = 'https${url.split('http')[1]}';
-
+  if(url==null){//防止无权限歌曲的出现，导致歌曲空挡
+    url='http://m801.music.126.net/20210403175852/e3f6214608219b5c517ace89919eb342/jdymusic/obj/w5zDlMODwrDDiGjCn8Ky/1668938014/7cda/6ba0/49ff/1f7a90a7869eba1ef4d454e2db6f5b87.mp3';
+  }
+  url = 'https${url.split('http')[1]}';
   print('**************************');
+  print('===============id: $id');
   print('data: ${url.toString()}');
   print('**************************');
 

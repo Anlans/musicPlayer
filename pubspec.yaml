@@ -79,6 +79,13 @@ flutter:
     - assets/icon-video.png
     - assets/icon-video-b.png
     - assets/icon-left-arrow.png
+    - assets/icon-login-logo.png
+    - assets/icon-easy.png
+    - assets/icon-qq.png
+    - assets/icon-wechat.png
+    - assets/icon-weibo.png
+    - assets/icon-apple.png
+    - assets/login_img_1.png
 
     - assets/icon-3dot-w.png
     - assets/icon-backward-w.png

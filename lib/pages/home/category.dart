@@ -7,7 +7,7 @@ import 'package:musicplayer/main.dart';
 class Category extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    getSongListDetail();//该函数之内已经调用getSongList();所以无需再调用getSongList()
+    // getSongListDetail();//该函数之内已经调用getSongList();所以无需再调用getSongList()
     final screen=Screen(context);
     const items=[
       {'title': '每日推荐', 'img':'assets/cate_1.png'},

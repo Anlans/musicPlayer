@@ -12,7 +12,7 @@ import 'package:musicplayer/widgets/song_list.dart';
 import 'package:musicplayer/widgets/recommend_list.dart';
 import 'package:musicplayer/widgets/global_navigation_bar.dart';
 import 'package:musicplayer/pages/player/play_list.dart';
-
+bool tf=true;
 int cnt=0;//掌握每首歌的状态，是否切歌，当前歌曲的图片及其歌名，作者
 var aaa;
 
@@ -34,6 +34,24 @@ var recommendList1=[  //推荐列表歌曲信息
   {'id':'1824415848', 'img': 'http://p4.music.126.net/W9rGvRP3j-qICdS4OuE38w==/109951165774446145.jpg', 'title': 'Phenomena', 'artist': 'Shingo Nakamura', 'tip':'Phenomena'},
   {'id':'1833379103', 'img': 'http://p3.music.126.net/fjtfUFKKXhHFQcsNcga7Lw==/109951165845178824.jpg', 'title': 'Pick N Choose', 'artist': 'JP THE WAVY', 'tip':'WAVY TAPE 2'},
 
+];
+
+var listItems=[//待更换
+  {'id':11, 'img':'assets/tmp_cover_1.jpg', 'title': '钢琴摇滚 | 浪子赠予诗人的一纸情书'},
+  {'id':12, 'img':'assets/tmp_cover_2.jpg', 'title': '夏天悄悄过去'},
+  {'id':13, 'img':'assets/tmp_cover_3.jpg', 'title': '夏天悄悄过去'},
+
+  {'id':14, 'img':'assets/tmp_cover_4.jpg', 'title': '夏天悄悄过去'},
+  {'id':15, 'img':'assets/tmp_cover_5.jpg', 'title': '夏天悄悄过去'},
+  {'id':16, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
+
+  {'id':17, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
+  {'id':18, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
+  {'id':19, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
+
+  {'id':20, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
+  {'id':21, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
+  {'id':22, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
 ];
 
 
@@ -87,71 +105,105 @@ class HomePage extends StatelessWidget {
 }
 
 void getSongListDetail()async{//拿到歌单每首歌的数据,重置recommendList1
-  int loc=0;
-  getSongList();
-  final response =
-    await DioUtil.getInstance().post("$API_PREFIX/playlist/detail?id=${songList1[0]['id']}", {});
-  final data=response.data;
-  // var aaaaa=data['playlist']['tracks'];
+  // int loc=0;
+  // getSongList();
+  // final response =
+  //   await DioUtil.getInstance().post("$API_PREFIX/playlist/detail?id=${songList1[1]['id']}", {});
+  // final data=response.data;
+  //
+  // for(int i=0; i<6; i++) {
+  //   loc++;//不可直接在数组中使用++，否则会 歌曲id对应其作者artist等数据不匹配
+  //   int sgListDetailSongId = data['playlist']['tracks'][loc]['id'];
+  //   String sgLDSId = sgListDetailSongId.toString();
+  //   String sgListDetailSongName = data['playlist']['tracks'][loc]['name'];
+  //   String sgListDetailSongArtist = data['playlist']['tracks'][loc]['ar'][0]['name'];
+  //   String sgListDetailSongImg = data['playlist']['tracks'][loc]['al']['picUrl'];
+  //   String sgListDetailSongTip=data['playlist']['tracks'][loc]['al']['name'];
+  //
+  //   // final response1 = await DioUtil.getInstance()
+  //   //     .post("$API_PREFIX/song/url?id=$sgLDSId&br=320000", {});
+  //   // final data1 = response1.data;
+  //   // try{
+  //   //   String url1 = data['data'][0]['url'];
+  //   //   if(url1==null){
+  //   //     recommendList1[i]['id']='1430287528';
+  //   //   }
+  //   // }catch(e){
+  //   //   print('errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror');
+  //   // }
+  //
+  //   recommendList1[i]['id']=sgLDSId;
+  //   recommendList1[i]['img']=sgListDetailSongImg;
+  //   recommendList1[i]['title']=sgListDetailSongName;
+  //   recommendList1[i]['artist']=sgListDetailSongArtist;
+  //   recommendList1[i]['tip']=sgListDetailSongTip;
+  //   print('=============loc: $loc');
+  //
+  // }
+}
 
-  for(int i=0; i<6; i++) {
-    // if(loc<8){
-      int sgListDetailSongId = data['playlist']['tracks'][loc]['id'];
-      print('================RESET1==============loc: $loc');
-      String sgLDSId = sgListDetailSongId.toString();
-      String sgListDetailSongName = data['playlist']['tracks'][loc]['name'];
-      print('================RESET2==============loc: $loc');
-      String sgListDetailSongArtist = data['playlist']['tracks'][loc]['ar'][0]['name'];
-      print('================RESET3==============loc: $loc');
-      String sgListDetailSongImg = data['playlist']['tracks'][loc]['al']['picUrl'];
-      print('================RESET4==============loc: $loc');
-      String sgListDetailSongTip=data['playlist']['tracks'][loc]['al']['name'];
-      print('================RESET4==============loc: $loc');
-
-
-      recommendList1[i]['id']=sgLDSId;
-      recommendList1[i]['img']=sgListDetailSongImg;
-      recommendList1[i]['title']=sgListDetailSongName;
-      recommendList1[i]['artist']=sgListDetailSongArtist;
-      recommendList1[i]['tip']=sgListDetailSongTip;
-      print('=============loc: $loc');
-
-      loc++;//不可直接在数组中使用++，否则会 歌曲id对应其作者artist等数据不匹配
-    // }else{
-    //   loc=0;
-
-      print('================RESET==============loc: $loc');
-    // }
-  }
+void getSongSuccess(String id, bool tf)async{
+  // final response = await DioUtil.getInstance()
+  //     .post("$API_PREFIX/song/url?id=$id&br=320000", {});
+  // final data = response.data;
+  // String url = data['data'][0]['url'];
+  // if(url == null){
+  //
+  // }
 }
 
 void getSongList()async{
-  var loc=0;
-  final response =
-    await DioUtil.getInstance().post("$API_PREFIX/top/playlist?limit=100&order=hot", {});
-  final data=response.data;
+  // var loc=0;
+  // final response =
+  //   await DioUtil.getInstance().post("$API_PREFIX/top/playlist?limit=100&order=hot", {});
+  // final data=response.data;
+  //
+  // for(var i=0; i<6; i++) {
+  //   if(loc<6) {
+  //     int sgListId = data['playlists'][loc]['id'];
+  //     String sgListId1 = sgListId.toString();
+  //     String sgListImg = data['playlists'][loc]['coverImgUrl'];
+  //     String sgListName = data['playlists'][loc]['name'];
+  //
+  //     songList1[i]['img']=sgListImg;
+  //     songList1[i]['id']=sgListId1;
+  //     songList1[i]['title']=sgListName;
+  //
+  //     loc++;
+  //   }else{
+  //     loc=0;
+  //   }
+  // }
+}
 
-  for(var i=0; i<6; i++) {
-    if(loc<6) {
-      int sgListId = data['playlists'][loc]['id'];
-      String sgListId1 = sgListId.toString();
-      String sgListImg = data['playlists'][loc]['coverImgUrl'];
-      String sgListName = data['playlists'][loc]['name'];
-
-      songList1[i]['img']=sgListImg;
-      songList1[i]['id']=sgListId1;
-      songList1[i]['title']=sgListName;
-
-      loc++;
-    }else{
-      loc=0;
-    }
-  }
+void getSongListSquare()async{
+  // var loc=20;
+  // final response =
+  //   await DioUtil.getInstance().post("$API_PREFIX/top/playlist?limit=100&order=hot", {});
+  // final data=response.data;
+  //
+  // for(var i=0; i<12; i++) {
+  //   if(loc<50) {
+  //     int sgListId = data['playlists'][loc]['id'];
+  //     String sgListImg = data['playlists'][loc]['coverImgUrl'];
+  //     String sgListName = data['playlists'][loc]['name'];
+  //
+  //     listItems[i]['img']=sgListImg;
+  //     listItems[i]['id']=sgListId;
+  //     listItems[i]['title']=sgListName;
+  //
+  //     loc++;
+  //   }else{
+  //     loc=1;
+  //   }
+  // }
 }
 
 void getSongDetail()async{
-  getSongList();
-  getSongListDetail();
+  // getSongList();
+  // getSongListDetail();
+
+
   // final response =
   //   await DioUtil.getInstance().post("$API_PREFIX/song/detail?ids=${recommendList1[0]['id']}", {});
   //

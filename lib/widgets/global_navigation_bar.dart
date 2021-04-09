@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:musicplayer/util/screen_util.dart';
-
+//首页底部导航栏
 // class GlobalNavigationBar extends HookWidget{
 //   @override
 //   Widget build(BuildContext context) {
@@ -31,25 +31,27 @@ const navigationItems=[//底部导航栏按钮信息
     'title': '发现',
   },
   {
-    'img': 'assets/icon-video-b.png',
-    'activeImg': 'assets/icon-video.png',
-    'title': '视频',
+    'img': 'assets/icon-person-b.png',
+    'activeImg': 'assets/icon-person.png',
+    'title': '账号',
   },
   {
     'img': 'assets/icon-music-b.png',
     'activeImg': 'assets/icon-music.png',
     'title': '我的',
   },
-  {
-    'img': 'assets/icon-group-b.png',
-    'activeImg': 'assets/icon-group.png',
-    'title': '云村',
-  },
-  {
-    'img': 'assets/icon-person-b.png',
-    'activeImg': 'assets/icon-person.png',
-    'title': '账号',
-  }
+  // {
+  //   'img': 'assets/icon-video-b.png',
+  //   'activeImg': 'assets/icon-video.png',
+  //   'title': '视频',
+  // },
+
+  // {
+  //   'img': 'assets/icon-group-b.png',
+  //   'activeImg': 'assets/icon-group.png',
+  //   'title': '云村',
+  // },
+
 
 ];
 
@@ -59,7 +61,7 @@ class GlobalNavigationBar extends HookWidget{
   final int value;
   // final NavigationBarCallback onChanged;//active状态
 
-  GlobalNavigationBar({Key key, this.value=0}):super(key: key);//默认第一个发现亮
+  GlobalNavigationBar({Key key, this.value=2}):super(key: key);//默认第一个发现亮
 
   @override
   Widget build(BuildContext context) {
@@ -85,11 +87,17 @@ class GlobalNavigationBar extends HookWidget{
               active: value==index,
               onTap: (){
                 switch(index){
-                  case 0:
+                  case 0://发现
                     Navigator.pushNamed(context, '/home');
+                    print('case0: index=$index');
                     break;
-                  case 2:
+                  case 1: //账号
+                    Navigator.pushNamed(context, '/login');
+                    print('case2: index=$index');
+                    break;
+                  case 2://我的
                     Navigator.pushNamed(context, '/square');
+                    print('case1: index=$index');
                     break;
                 }
                 // onChanged(index);//等待父级传参(home传参)

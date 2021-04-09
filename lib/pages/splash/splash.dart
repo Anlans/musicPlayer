@@ -2,10 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:musicplayer/util/screen_util.dart';
+import 'package:musicplayer/pages/home/home.dart';
 
 class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    getSongListDetail();
+    getSongListSquare();
+    getSongDetail();
     final screen = Screen(context);
     Timer(Duration(seconds: 3),(){
       Navigator.pushReplacementNamed(context, '/home');

@@ -15,7 +15,8 @@ class SongList extends StatelessWidget{
   Widget build(BuildContext context) {
     // getSongList();//直接放到Category()调用，这样才可以直接更新歌单精选站的数据
     // getSongDetail();
-    print('-----------------Song: ${songList1[0]['img']}');
+
+    // print('-----------------Song: ${songList1[0]['img']}');
     final screen=Screen(context);
 
     return Column(children: [
