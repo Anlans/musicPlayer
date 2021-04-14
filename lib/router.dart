@@ -4,6 +4,7 @@ import 'package:musicplayer/pages/home/home.dart';
 import 'package:musicplayer/pages/square/square.dart';
 import 'package:musicplayer/pages/player/player.dart';
 import 'package:musicplayer/pages/login/login.dart';
+import 'package:musicplayer/pages/user_center/user_center.dart';
 
 
 final routes={
@@ -12,4 +13,5 @@ final routes={
   "/square": (BuildContext context)=>SquarePage(),
   "/player": (BuildContext context)=>PlayerPage(),
   "/login": (BuildContext context)=>LoginPage(),
+  "/user-center": (BuildContext context)=>UserCenterPage(),
 };

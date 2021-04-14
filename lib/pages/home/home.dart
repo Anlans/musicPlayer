@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_redux_hooks/flutter_redux_hooks.dart';
 import 'package:musicplayer/util/global.dart';
 import 'package:musicplayer/util/request.dart';
 import 'package:musicplayer/util/screen_util.dart';
@@ -12,6 +13,8 @@ import 'package:musicplayer/widgets/song_list.dart';
 import 'package:musicplayer/widgets/recommend_list.dart';
 import 'package:musicplayer/widgets/global_navigation_bar.dart';
 import 'package:musicplayer/pages/player/play_list.dart';
+import 'package:musicplayer/store.dart';
+
 bool tf=true;
 int cnt=0;//掌握每首歌的状态，是否切歌，当前歌曲的图片及其歌名，作者
 var aaa;
@@ -55,10 +58,11 @@ var listItems=[//待更换
 ];
 
 
-class HomePage extends StatelessWidget {
+class HomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final screen=Screen(context);
+    final nickname=useSelector<StoreState, String>((state)=>state.nickname);
 
     setStatusBarStyle(Brightness.dark);
 
@@ -75,6 +79,7 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.only(top: screen.top+screen.calc(7)),
             child: Column(
               children: [
+                Text(nickname!=null?nickname:'<未登录>'),
                 Header(),
                 MyBanner(),
                 Category(),

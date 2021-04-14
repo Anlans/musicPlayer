@@ -92,7 +92,7 @@ class GlobalNavigationBar extends HookWidget{
                     print('case0: index=$index');
                     break;
                   case 1: //账号
-                    Navigator.pushNamed(context, '/login');
+                    Navigator.pushNamed(context, '/user-center');
                     print('case2: index=$index');
                     break;
                   case 2://我的
