@@ -9,6 +9,10 @@ import 'package:musicplayer/pages/login/login_5.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:musicplayer/store.dart';
 
+var rigPhone='13485768888';
+var globalNickname='用户昵称';
+bool Logining=false;
+
 class LoginPage extends HookWidget{
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,7 @@ class LoginPage extends HookWidget{
       2: Login2(onNext: (area, phone){
         // print(area);
         // print(phone);
+        rigPhone=phone;
         Navigator.pushNamed(context, '/login', arguments: {
           'step': 3,
         });
@@ -61,13 +66,14 @@ class LoginPage extends HookWidget{
       },),
       5: Login5(onSubmit: (nickname){
         print(nickname);
-
+        Logining=true;
+        globalNickname=nickname;
         //完成注册
         dispatch(StoreAction(
           StoreActionType.UserLogin,
           nickname
         ));
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushNamed(context, '/user-center');
       },),
     };
 

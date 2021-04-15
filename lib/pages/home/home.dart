@@ -79,7 +79,7 @@ class HomePage extends HookWidget {
             padding: EdgeInsets.only(top: screen.top+screen.calc(7)),
             child: Column(
               children: [
-                Text(nickname!=null?nickname:'<未登录>'),
+                // Text(nickname!=null?nickname:'<未登录>'),
                 Header(),
                 MyBanner(),
                 Category(),

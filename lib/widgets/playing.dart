@@ -3,6 +3,7 @@ import 'package:musicplayer/util/screen_util.dart';
 import 'package:musicplayer/widgets/arc_progress.dart';
 import 'package:musicplayer/util/play_state.dart';
 
+//播放中状态小组件，右上角播放状态
 class Playing extends StatelessWidget{
   @override
   Widget build(BuildContext context) {

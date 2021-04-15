@@ -70,6 +70,9 @@ class PlayerPage extends StatelessWidget{
                     onDownload: (){
                       print('down');
                     },
+                    onMessage: (){
+                      Navigator.pushNamed(context, '/comment');
+                    },
                   ),
                   Progress(
                     current: playState.current!=null?playState.current:null,

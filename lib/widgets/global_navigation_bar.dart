@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:musicplayer/util/screen_util.dart';
+import 'package:musicplayer/pages/login/login.dart';
 //首页底部导航栏
 // class GlobalNavigationBar extends HookWidget{
 //   @override
@@ -92,7 +93,7 @@ class GlobalNavigationBar extends HookWidget{
                     print('case0: index=$index');
                     break;
                   case 1: //账号
-                    Navigator.pushNamed(context, '/user-center');
+                    Logining?Navigator.pushNamed(context, '/user-center'):Navigator.pushNamed(context, '/login');
                     print('case2: index=$index');
                     break;
                   case 2://我的

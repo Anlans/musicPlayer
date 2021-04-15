@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:musicplayer/util/screen_util.dart';
-import 'package:musicplayer/pages/login/header.dart';
+import 'package:musicplayer/widgets/header.dart';
+import 'package:musicplayer/pages/login/login.dart';
 //验证码验证页面
 // ignore: must_be_immutable
 class Login3 extends StatelessWidget{
@@ -74,7 +75,7 @@ class _VerifiCode extends HookWidget{
           margin: EdgeInsets.only(top: screen.calc(30)),
           child: Row(
             children: [
-              Text('+86 134****9867', style: TextStyle(
+              Text('+86 $rigPhone', style: TextStyle(
                 fontSize: screen.calc(26),
                 color: Color(0xffa7a7a7),
               )),

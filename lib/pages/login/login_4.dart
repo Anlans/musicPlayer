@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:musicplayer/util/screen_util.dart';
-import 'package:musicplayer/pages/login/header.dart';
+import 'package:musicplayer/widgets/header.dart';
 import 'package:musicplayer/widgets/round_flat_button.dart';
 //重设密码页面，设置昵称
 

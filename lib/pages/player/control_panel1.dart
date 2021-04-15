@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:musicplayer/util/screen_util.dart';
+import 'package:musicplayer/util/system_util.dart';
 import 'package:musicplayer/widgets/img_button.dart';
+import 'package:musicplayer/pages/home/home.dart';
 
 class ControlPanel1 extends StatelessWidget{
   final bool heart;
@@ -8,6 +10,7 @@ class ControlPanel1 extends StatelessWidget{
   final VoidCallback onUnHeart;
   final VoidCallback onDownload;
   final VoidCallback onBell;
+  final VoidCallback onMessage;
 
   ControlPanel1({
     Key key,
@@ -16,6 +19,7 @@ class ControlPanel1 extends StatelessWidget{
     this.onHeart,
     this.onUnHeart,
     this.onBell,
+    this.onMessage,
   }):super(key: key);
 
   @override
@@ -23,7 +27,7 @@ class ControlPanel1 extends StatelessWidget{
     final screen=Screen(context);
     // final disableOpacity=.5;//按钮透明度，无法使用时的变暗
     // final args=ModalRoute.of(context).settings.arguments as Map;
-
+    setStatusBarStyle(Brightness.light);
     // print(args);
 
     return Container(
@@ -58,7 +62,11 @@ class ControlPanel1 extends StatelessWidget{
             ),
           ),
           Center(
-            child: Image.asset('assets/icon-message-w.png', width: screen.calc(55), height: screen.calc(55),),
+            child: ImgButton(
+              'assets/icon-message-w.png',
+              onTap: onMessage,
+              width: screen.calc(55), height: screen.calc(55),
+            ),
           ),
           Center(
             child: Image.asset('assets/icon-3dot-w.png', width: screen.calc(55), height: screen.calc(55),),
