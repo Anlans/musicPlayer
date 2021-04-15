@@ -94,30 +94,30 @@ class PlayerPage extends StatelessWidget{
                       //播放时设为false，图标显示为play
                     },
                     onBackward: ()async{
-                      // if(cnt>0) {
-                      //   cnt--;
-                      //   var id = recommendList1[cnt]['id'];
-                      //   print('------id: $id');
-                      //   res = await getSgUrl(id);
-                      //   print('--------------------------');
-                      //   print('res: $res');
-                      //   playState.player.play(res);
-                      //   print('back');
-                      // }else{
-                      //   cnt=length-1;
-                      // }
+                      if(cnt>0) {
+                        cnt--;
+                        var id = recommendList1[cnt]['id'];
+                        print('------id: $id');
+                        res = await getSgUrl(id);
+                        print('--------------------------');
+                        print('res: $res');
+                        playState.player.play(res);
+                        print('back');
+                      }else{
+                        cnt=length-1;
+                      }
                     },
                     onForward: ()async{
-                      // if(cnt<length-1) {
-                      //   cnt++;
-                      //   print('----------cnt: $cnt');
-                      //   var id=recommendList1[cnt]['id'];
-                      //   res = await getSgUrl(id);
-                      //   playState.player.play(res);
-                      //   print('forward');
-                      // }else{
-                      //   cnt=1;//回撤至1而不是0，避免到onBackward时爆栈
-                      // }
+                      if(cnt<length-1) {
+                        cnt++;
+                        print('----------cnt: $cnt');
+                        var id=recommendList1[cnt]['id'];
+                        res = await getSgUrl(id);
+                        playState.player.play(res);
+                        print('forward');
+                      }else{
+                        cnt=1;//回撤至1而不是0，避免到onBackward时爆栈
+                      }
                     },
                     onPlaylist: (){
                       showPlayList(context);

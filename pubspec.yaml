@@ -95,6 +95,8 @@ flutter:
     - assets/hongbao.png
     - assets/login_img_1.png
     - assets/icon-right-arrow-cdcdcd.png
+    - assets/icon-comment-emoji.png
+    - assets/icon-tie.png
 
     - assets/icon-3dot-w.png
     - assets/icon-backward-w.png

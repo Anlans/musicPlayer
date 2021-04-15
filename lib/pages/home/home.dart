@@ -109,104 +109,105 @@ class HomePage extends HookWidget {
 
 }
 
-void getSongListDetail()async{//拿到歌单每首歌的数据,重置recommendList1
-  // int loc=0;
-  // getSongList();
-  // final response =
-  //   await DioUtil.getInstance().post("$API_PREFIX/playlist/detail?id=${songList1[1]['id']}", {});
-  // final data=response.data;
-  //
-  // for(int i=0; i<6; i++) {
-  //   loc++;//不可直接在数组中使用++，否则会 歌曲id对应其作者artist等数据不匹配
-  //   int sgListDetailSongId = data['playlist']['tracks'][loc]['id'];
-  //   String sgLDSId = sgListDetailSongId.toString();
-  //   String sgListDetailSongName = data['playlist']['tracks'][loc]['name'];
-  //   String sgListDetailSongArtist = data['playlist']['tracks'][loc]['ar'][0]['name'];
-  //   String sgListDetailSongImg = data['playlist']['tracks'][loc]['al']['picUrl'];
-  //   String sgListDetailSongTip=data['playlist']['tracks'][loc]['al']['name'];
-  //
-  //   // final response1 = await DioUtil.getInstance()
-  //   //     .post("$API_PREFIX/song/url?id=$sgLDSId&br=320000", {});
-  //   // final data1 = response1.data;
-  //   // try{
-  //   //   String url1 = data['data'][0]['url'];
-  //   //   if(url1==null){
-  //   //     recommendList1[i]['id']='1430287528';
-  //   //   }
-  //   // }catch(e){
-  //   //   print('errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror');
-  //   // }
-  //
-  //   recommendList1[i]['id']=sgLDSId;
-  //   recommendList1[i]['img']=sgListDetailSongImg;
-  //   recommendList1[i]['title']=sgListDetailSongName;
-  //   recommendList1[i]['artist']=sgListDetailSongArtist;
-  //   recommendList1[i]['tip']=sgListDetailSongTip;
-  //   print('=============loc: $loc');
-  //
-  // }
+void getSongListDetail(int index)async{//拿到歌单每首歌的数据,重置recommendList1
+  //index表示点击指定歌单时，内部播放的歌曲为不同风格的歌单所包含
+  int loc=0;
+  getSongList();
+  final response =
+    await DioUtil.getInstance().post("$API_PREFIX/playlist/detail?id=${songList1[index]['id']}", {});
+  final data=response.data;
+
+  for(int i=0; i<6; i++) {
+    loc++;//不可直接在数组中使用++，否则会 歌曲id对应其作者artist等数据不匹配
+    int sgListDetailSongId = data['playlist']['tracks'][loc]['id'];
+    String sgLDSId = sgListDetailSongId.toString();
+    String sgListDetailSongName = data['playlist']['tracks'][loc]['name'];
+    String sgListDetailSongArtist = data['playlist']['tracks'][loc]['ar'][0]['name'];
+    String sgListDetailSongImg = data['playlist']['tracks'][loc]['al']['picUrl'];
+    String sgListDetailSongTip=data['playlist']['tracks'][loc]['al']['name'];
+
+    // final response1 = await DioUtil.getInstance()
+    //     .post("$API_PREFIX/song/url?id=$sgLDSId&br=320000", {});
+    // final data1 = response1.data;
+    // try{
+    //   String url1 = data['data'][0]['url'];
+    //   if(url1==null){
+    //     recommendList1[i]['id']='1430287528';
+    //   }
+    // }catch(e){
+    //   print('errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror');
+    // }
+
+    recommendList1[i]['id']=sgLDSId;
+    recommendList1[i]['img']=sgListDetailSongImg;
+    recommendList1[i]['title']=sgListDetailSongName;
+    recommendList1[i]['artist']=sgListDetailSongArtist;
+    recommendList1[i]['tip']=sgListDetailSongTip;
+    print('=============loc: $loc');
+
+  }
 }
 
 void getSongSuccess(String id, bool tf)async{
-  // final response = await DioUtil.getInstance()
-  //     .post("$API_PREFIX/song/url?id=$id&br=320000", {});
-  // final data = response.data;
-  // String url = data['data'][0]['url'];
-  // if(url == null){
-  //
-  // }
+  final response = await DioUtil.getInstance()
+      .post("$API_PREFIX/song/url?id=$id&br=320000", {});
+  final data = response.data;
+  String url = data['data'][0]['url'];
+  if(url == null){
+
+  }
 }
 
 void getSongList()async{
-  // var loc=0;
-  // final response =
-  //   await DioUtil.getInstance().post("$API_PREFIX/top/playlist?limit=100&order=hot", {});
-  // final data=response.data;
-  //
-  // for(var i=0; i<6; i++) {
-  //   if(loc<6) {
-  //     int sgListId = data['playlists'][loc]['id'];
-  //     String sgListId1 = sgListId.toString();
-  //     String sgListImg = data['playlists'][loc]['coverImgUrl'];
-  //     String sgListName = data['playlists'][loc]['name'];
-  //
-  //     songList1[i]['img']=sgListImg;
-  //     songList1[i]['id']=sgListId1;
-  //     songList1[i]['title']=sgListName;
-  //
-  //     loc++;
-  //   }else{
-  //     loc=0;
-  //   }
-  // }
+  var loc=0;
+  final response =
+    await DioUtil.getInstance().post("$API_PREFIX/top/playlist?limit=100&order=hot", {});
+  final data=response.data;
+
+  for(var i=0; i<6; i++) {
+    if(loc<6) {
+      int sgListId = data['playlists'][loc]['id'];
+      String sgListId1 = sgListId.toString();
+      String sgListImg = data['playlists'][loc]['coverImgUrl'];
+      String sgListName = data['playlists'][loc]['name'];
+
+      songList1[i]['img']=sgListImg;
+      songList1[i]['id']=sgListId1;
+      songList1[i]['title']=sgListName;
+
+      loc++;
+    }else{
+      loc=0;
+    }
+  }
 }
 
 void getSongListSquare()async{
-  // var loc=20;
-  // final response =
-  //   await DioUtil.getInstance().post("$API_PREFIX/top/playlist?limit=100&order=hot", {});
-  // final data=response.data;
-  //
-  // for(var i=0; i<12; i++) {
-  //   if(loc<50) {
-  //     int sgListId = data['playlists'][loc]['id'];
-  //     String sgListImg = data['playlists'][loc]['coverImgUrl'];
-  //     String sgListName = data['playlists'][loc]['name'];
-  //
-  //     listItems[i]['img']=sgListImg;
-  //     listItems[i]['id']=sgListId;
-  //     listItems[i]['title']=sgListName;
-  //
-  //     loc++;
-  //   }else{
-  //     loc=1;
-  //   }
-  // }
+  var loc=20;
+  final response =
+    await DioUtil.getInstance().post("$API_PREFIX/top/playlist?limit=100&order=hot", {});
+  final data=response.data;
+
+  for(var i=0; i<12; i++) {
+    if(loc<50) {
+      int sgListId = data['playlists'][loc]['id'];
+      String sgListImg = data['playlists'][loc]['coverImgUrl'];
+      String sgListName = data['playlists'][loc]['name'];
+
+      listItems[i]['img']=sgListImg;
+      listItems[i]['id']=sgListId;
+      listItems[i]['title']=sgListName;
+
+      loc++;
+    }else{
+      loc=1;
+    }
+  }
 }
 
 void getSongDetail()async{
-  // getSongList();
-  // getSongListDetail();
+  getSongList();
+  getSongListDetail(3);
 
 
   // final response =

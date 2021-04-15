@@ -63,37 +63,44 @@ class SongList extends StatelessWidget{
         child: Container(
             margin: EdgeInsets.only(top: screen.calc(24)),
             padding: EdgeInsets.only(left: screen.calc(22), right: screen.calc(22)),
-            child: Row(children: items.map((item) => Container(
-              width: screen.calc(209),
-              margin: EdgeInsets.only(left: screen.calc(10), right: screen.calc(10)),
-              child: GestureDetector(
-                onTap: (){
-                  Navigator.pushNamed(context, '/player', arguments: {
-                    'id': item['id'],
-                  });
-                },
-                child: Column(children: [
+            child: Row(
+              children: items.asMap().map((index, item) => MapEntry(
+                  index,
                   Container(
                     width: screen.calc(209),
-                    height: screen.calc(209),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(item['img']),
-                        fit: BoxFit.fill,
-                      ),
-                      borderRadius: BorderRadius.circular(screen.calc(10)),
+                    margin: EdgeInsets.only(left: screen.calc(10), right: screen.calc(10)),
+                    child: GestureDetector(
+                      onTap: (){
+                        print('-------------------------------');
+                        print('index: ---> $index');
+                        getSongListDetail(index);
+                        Navigator.pushNamed(context, '/player', arguments: {
+                          'id': item['id'],
+                        });
+                      },
+                      child: Column(children: [
+                        Container(
+                          width: screen.calc(209),
+                          height: screen.calc(209),
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(item['img']),
+                              fit: BoxFit.fill,
+                            ),
+                            borderRadius: BorderRadius.circular(screen.calc(10)),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: screen.calc(12)),
+                          height: screen.calc(64),
+                          child: Text(item['title'], style: TextStyle(
+                            fontSize: screen.calc(24),
+                          ), overflow: TextOverflow.ellipsis, maxLines: 2),
+                        ),
+                      ]),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: screen.calc(12)),
-                    height: screen.calc(64),
-                    child: Text(item['title'], style: TextStyle(
-                      fontSize: screen.calc(24),
-                    ), overflow: TextOverflow.ellipsis, maxLines: 2),
-                  ),
-                ]),
-              ),
-            )).toList())
+              )).values.toList())
         ),
       ),
     ]);

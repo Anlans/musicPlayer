@@ -7,7 +7,7 @@ import 'package:musicplayer/pages/home/home.dart';
 class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    getSongListDetail();
+    getSongListDetail(3);
     getSongListSquare();
     getSongDetail();
     final screen = Screen(context);

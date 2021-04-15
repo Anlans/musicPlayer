@@ -191,7 +191,8 @@ class _Item extends StatelessWidget{
                       ),
                       Container(
                         margin: EdgeInsets.only(left: screen.calc(8)),
-                        child: Text(data['tip'], style: TextStyle(color: Color(0xff9a9a9a)), overflow: TextOverflow.ellipsis, maxLines: 1),
+                        //TODO 使用tip会有布局问题, 待修改适用
+                        child: Text(data['artist'], style: TextStyle(color: Color(0xff9a9a9a)), overflow: TextOverflow.clip, maxLines: 1),
                       ),
                     ],
                   ),
