@@ -17,8 +17,8 @@ import 'package:musicplayer/pages/player/play_list.dart';
 import 'package:musicplayer/pages/home/home.dart';
 
 //res只有设置为全局变量才可以在点击切歌的时候同步更改，这样在暂停时再次点击播放按钮时会继续当前歌曲的播放，而不会继续播放默认歌曲
-// var res='https://music.163.com/song/media/outer/url?id=33894312.mp3';
-var res=recommendList1[0]['id'];
+var res='https://music.163.com/song/media/outer/url?id=33894312.mp3';
+// var res=recommendList1[0]['id'];
 final length=recommendList1.length;
 
 class PlayerPage extends StatelessWidget{
@@ -98,6 +98,7 @@ class PlayerPage extends StatelessWidget{
                         cnt--;
                         var id = recommendList1[cnt]['id'];
                         print('------id: $id');
+                        getComment(id);
                         res = await getSgUrl(id);
                         print('--------------------------');
                         print('res: $res');
@@ -112,6 +113,7 @@ class PlayerPage extends StatelessWidget{
                         cnt++;
                         print('----------cnt: $cnt');
                         var id=recommendList1[cnt]['id'];
+                        getComment(id);
                         res = await getSgUrl(id);
                         playState.player.play(res);
                         print('forward');

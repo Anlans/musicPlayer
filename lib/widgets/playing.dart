@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:musicplayer/util/screen_util.dart';
 import 'package:musicplayer/widgets/arc_progress.dart';
 import 'package:musicplayer/util/play_state.dart';
+import 'package:musicplayer/pages/home/home.dart';
 
 //播放中状态小组件，右上角播放状态
 class Playing extends StatelessWidget{
@@ -42,7 +43,7 @@ class Playing extends StatelessWidget{
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: AssetImage('assets/tmp_icon_music.png'),//右上角播放图
+                    image: NetworkImage(recommendList1[cnt]['img']),//右上角播放图
                   ),
                   borderRadius: BorderRadius.circular(size/2),
                 ),

@@ -26,11 +26,11 @@ class SplashPage extends StatelessWidget {
             left: screen.calc(150),
             child: Image.asset('assets/splash_logo.png',width: screen.calc(450), height: screen.calc(89),)
           ),
-          Positioned(
-            bottom: screen.calc(41),
-            left: screen.calc(264),
-            child: Image.asset('assets/splash_logo_sm.png', width: screen.calc(222), height: screen.calc(51),),
-          )
+          // Positioned(
+          //   bottom: screen.calc(41),
+          //   left: screen.calc(264),
+          //   child: Image.asset('assets/splash_logo_sm.png', width: screen.calc(222), height: screen.calc(51),),
+          // )
         ],
       ),
     );

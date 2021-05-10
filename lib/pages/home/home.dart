@@ -57,6 +57,63 @@ var listItems=[//待更换
   {'id':22, 'img':'assets/tmp_cover_6.jpg', 'title': '夏天悄悄过去'},
 ];
 
+var comments=[
+  {
+    'id': 322,
+    'nickname': '吟游猫诗人',
+    'avatar': 'assets/tmp_avatar_1.png',
+    'date': '2015年07月02日',
+    'likes': 6654,
+    'content': '非常喜欢这种声音这种曲风，更别说颜值那么高的一位歌手，直男都能瞬间被瓣弯。。话说一听到他的歌声和风格我就想到另一位我喜欢好多年的歌手- james morrison.顺带推荐。',
+    'comments': 65,
+  },
+  {
+    'id': 3423,
+    'nickname': 'aaaa',
+    'avatar': 'assets/tmp_avatar_1.png',
+    'date': '2050年09月30日',
+    'likes': 665554,
+    'content': '据中国国家航天局探月与航天工程中心消息，嫦娥四号着陆器和“玉兔二号”月球车分别于9月24日7时30分、9月23日23时18分结束第22月昼工作，按地面指令完成月夜模式设置，进入月夜休眠。科研人员利用全景相机环拍探测、红外成像光谱仪定标探测、测月雷达行驶过程中同步探测等数据，取得多项科学成果，近期发表在Nature Astronomy国际期刊上。图为测月雷达高频通道的探测剖面及解译结果。中新社发 中国国家航天局',
+    'comments': 7764,
+  },
+  {
+    'id': 1,
+    'nickname': '澎湃新闻',
+    'avatar': 'assets/tmp_avatar_1.png',
+    'date': '2020年09月25日',
+    'likes': 32,
+    'content': '曾几何时，我们曾经专门讨论过一汽夏利的问题，当时的夏利虽然已经面临着四面楚歌的危局，但是还有着一丝希望，然而就在最近这最后的曙光也消散殆尽，夏利正式一元卖身，一个时代彻底终结了，当A股再无夏利的时候，我们该回过头来看看这个曾经的国民神车是怎么走到如今彻底曲终人散的境地的？',
+    'comments': 3,
+  },
+  {
+    'id': 22,
+    'nickname': '吟游猫诗人',
+    'avatar': 'assets/tmp_avatar_1.png',
+    'date': '2015年07月02日',
+    'likes': 6654,
+    'content': '非常喜欢这种声音这种曲风，更别说颜值那么高的一位歌手，直男都能瞬间被瓣弯。。话说一听到他的歌声和风格我就想到另一位我喜欢好多年的歌手- james morrison.顺带推荐。',
+    'comments': 65,
+  },
+  {
+    'id': 33,
+    'nickname': '吟游猫诗人',
+    'avatar': 'assets/tmp_avatar_1.png',
+    'date': '2015年07月02日',
+    'likes': 6654,
+    'content': '非常喜欢这种声音这种曲风，更别说颜值那么高的一位歌手，直男都能瞬间被瓣弯。。话说一听到他的歌声和风格我就想到另一位我喜欢好多年的歌手- james morrison.顺带推荐。',
+    'comments': 65,
+  },
+  {
+    'id': 33,
+    'nickname': '吟游猫诗人',
+    'avatar': 'assets/tmp_avatar_1.png',
+    'date': '2015年07月02日',
+    'likes': 6654,
+    'content': '非常喜欢这种声音这种曲风，更别说颜值那么高的一位歌手，直男都能瞬间被瓣弯。。话说一听到他的歌声和风格我就想到另一位我喜欢好多年的歌手- james morrison.顺带推荐。',
+    'comments': 65,
+  },
+];
+
 
 class HomePage extends HookWidget {
   @override
@@ -148,7 +205,29 @@ void getSongListDetail(int index)async{//拿到歌单每首歌的数据,重置re
   }
 }
 
-void getSongSuccess(String id, bool tf)async{
+void getComment(var id)async{
+  final response = await DioUtil.getInstance()
+      .post("$API_PREFIX/comment/music?id=$id&limit=20", {});
+  final data = response.data;
+  var loc=0;
+  for(var i=0; i<6; i++){
+    if(loc>20) loc=0;
+    String avatarUrl=data['hotComments'][loc]['user']['avatarUrl'];
+    String nickName=data['hotComments'][loc]['user']['nickname'];
+    String content=data['hotComments'][loc]['content'];
+    var likeCount=data['hotComments'][loc]['likedCount'];
+    comments[i]['avatar']=avatarUrl;
+    comments[i]['nickname']=nickName;
+    comments[i]['content']=content;
+    comments[i]['likes']=likeCount;
+    loc++;
+    print('--loc: $loc-------content: $content-----------');
+  }
+
+
+}
+
+void getSongSuccess(String id, bool tf)async{//未用
   final response = await DioUtil.getInstance()
       .post("$API_PREFIX/song/url?id=$id&br=320000", {});
   final data = response.data;
