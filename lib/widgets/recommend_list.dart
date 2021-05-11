@@ -109,7 +109,7 @@ class _Body extends StatelessWidget{
           padding: EdgeInsets.only(top: screen.calc(4), left: screen.calc(32)),
           child: Row(
             children: columns.map<Widget>((arr)=>Column(
-              children: arr.map<Widget>((data)=>_Item(data: data)).toList(),    //md, 逻辑完美
+              children: arr.map<Widget>((data)=>_Item(data: data, onPlay: onPlay,)).toList(),    //md, 逻辑完美
             )).toList(),
           ),
         ),

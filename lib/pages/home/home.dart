@@ -148,7 +148,7 @@ class HomePage extends HookWidget {
                 RecommendList(title: '根据 Red 推荐', items: recommendList1, onMore: (){
                   print('more');
                 }, onPlay: (id){
-                  print('play: $id');
+                  print('play');
                 },),
                 Container(
                   height: screen.calc(100),

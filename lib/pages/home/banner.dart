@@ -29,7 +29,7 @@ class MyBanner extends HookWidget{
               },
               height: screen.calc(268),
 
-              autoPlay: false,      //开启自动播放轮播图 true:开启
+              autoPlay: true,      //开启自动播放轮播图 true:开启
 
               autoPlayInterval: Duration(seconds: 3),
               autoPlayAnimationDuration: Duration(milliseconds: 500),
