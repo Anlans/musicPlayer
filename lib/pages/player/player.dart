@@ -80,8 +80,8 @@ class PlayerPage extends StatelessWidget{
                   ControlPanel2(
                     playing: playState.playing,
                     onPlayTap: ()async{
-                      // var id='1827600686';
-                      // var res=await getSgUrl(id);
+                      var id=recommendList1[0]['id'];
+                      res=await getSgUrl(id);
                       print(res);
 
                       playState.player.play(res);
@@ -106,9 +106,17 @@ class PlayerPage extends StatelessWidget{
                         print('back');
                       }else{
                         cnt=length-1;
+                        var id = recommendList1[cnt]['id'];
+                        print('------id: $id');
+                        getComment(id);
+                        res = await getSgUrl(id);
+                        print('--------------------------');
+                        print('res: $res');
+                        playState.player.play(res);
                       }
                     },
                     onForward: ()async{
+                      print('cnt: $cnt');
                       if(cnt<length-1) {
                         cnt++;
                         print('----------cnt: $cnt');
@@ -118,7 +126,12 @@ class PlayerPage extends StatelessWidget{
                         playState.player.play(res);
                         print('forward');
                       }else{
-                        cnt=1;//回撤至1而不是0，避免到onBackward时爆栈
+                        cnt=0;//回撤至1而不是0，避免到onBackward时爆栈
+                        var id=recommendList1[cnt]['id'];
+                        getComment(id);
+                        res = await getSgUrl(id);
+                        playState.player.play(res);
+                        print('forward');
                       }
                     },
                     onPlaylist: (){

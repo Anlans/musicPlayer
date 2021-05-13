@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:musicplayer/pages/search/search.dart';
 import 'package:musicplayer/pages/splash/splash.dart';
 import 'package:musicplayer/pages/home/home.dart';
 import 'package:musicplayer/pages/square/square.dart';
@@ -19,4 +20,5 @@ final routes={
   "/user-center": (BuildContext context)=>UserCenterPage(),
   "/comment": (BuildContext context)=>CommentPage(),
   "/songlist": (BuildContext context)=>SonglistPage(),
+  "/searchlist": (BuildContext context)=>SearchListPage(),
 };

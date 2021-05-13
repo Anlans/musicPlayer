@@ -16,8 +16,8 @@ class DioUtil {
 
   DioUtil() {
     dio.options.baseUrl = "http://121.199.50.169:3000";
-    dio.options.connectTimeout = 200000;
-    dio.options.receiveTimeout = 400000;
+    dio.options.connectTimeout = 2000000;
+    dio.options.receiveTimeout = 4000000;
 
     getTemporaryDirectory().then((tempDir) {
       CookieJar cj = new PersistCookieJar(storage: FileStorage(tempDir.path));

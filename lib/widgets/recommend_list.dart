@@ -5,7 +5,7 @@ import 'package:musicplayer/util/screen_util.dart';
 import '../main.dart';
 
 
-typedef PlayCallBack=void Function(String);
+typedef PlayCallBack=void Function(String, String, String, String);
 class RecommendList extends StatelessWidget{
   final String title;
   final VoidCallback onMore;        //GestureDetector的onTap点击参数
@@ -203,7 +203,7 @@ class _Item extends StatelessWidget{
 
           GestureDetector(
             onTap: (){
-              onPlay(data['id']);
+              onPlay(data['id'], data['img'], data['title'], data['artist']);
             },
             child: Container(
               child: Center(

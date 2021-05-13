@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart';
+import 'package:musicplayer/pages/player/player.dart';
 import 'package:musicplayer/util/global.dart';
 import 'package:musicplayer/util/request.dart';
 import 'package:musicplayer/util/screen_util.dart';
@@ -14,6 +15,7 @@ import 'package:musicplayer/widgets/recommend_list.dart';
 import 'package:musicplayer/widgets/global_navigation_bar.dart';
 import 'package:musicplayer/pages/player/play_list.dart';
 import 'package:musicplayer/store.dart';
+import 'package:musicplayer/util/play_state.dart';
 
 bool tf=true;
 int cnt=0;//掌握每首歌的状态，是否切歌，当前歌曲的图片及其歌名，作者
@@ -22,7 +24,7 @@ var aaa;
 var songList1=[       //歌单信息
   {'id': '5315249487', 'img': 'http://p4.music.126.net/8sdYwsOfLA_3ciiuVHo0rQ==/109951165498690725.jpg', 'count': '9亿', 'title': '住在梦里的人，以后也要住进心里'},
   {'id': '2819914042', 'img': 'http://p4.music.126.net/nF_DRM-v5pEo-4n1brpM5w==/109951165845493667.jpg', 'count': '34.9亿', 'title': '[一周日语上新] 催眠麦克风最新对决曲 动感活力的视听盛宴'},
-  {'id': '6677014498', 'img': 'http://p3.music.126.net/Qf3JhZed8Kb6h4L6Lw5yFg==/109951165830962378.jpg', 'count': '5335', 'title': '弱者才会一蹶不振，我要逆风翻盘！'},
+  {'id': '6677014498', 'img': 'http://p3.music.126.net/Qf3JhZed8Kb6h4L6Lw5yFg==/109951165830962378.jpg', 'count': '3232', 'title': '弱者才会一蹶不振，我要逆风翻盘！'},
   {'id': '5137936188', 'img': 'http://p3.music.126.net/FNUk4SzH0iVCC3J571vSDw==/109951165338007405.jpg', 'count': '19万', 'title': '治愈轻音 | 让心中无事，如清水长流'},
   {'id': '6656095670', 'img': 'http://p3.music.126.net/1YDNWkIy_9GiIy7Kc_TsNw==/109951165796917206.jpg', 'count': '3232', 'title': '攒满想念值，换一次见面好不好'},
   {'id': '5377296264', 'img': 'http://p4.music.126.net/xV4sUkFfgiLU85MhD2aROw==/109951165597483922.jpg', 'count': '20亿亿', 'title': 'Lofi/复古/一场听觉盛宴'},
@@ -120,6 +122,8 @@ class HomePage extends HookWidget {
   Widget build(BuildContext context) {
     final screen=Screen(context);
     final nickname=useSelector<StoreState, String>((state)=>state.nickname);
+    final playState=PlayState.of(context);
+    var res;
 
     setStatusBarStyle(Brightness.dark);
 
@@ -137,7 +141,7 @@ class HomePage extends HookWidget {
             child: Column(
               children: [
                 // Text(nickname!=null?nickname:'<未登录>'),
-                Header(),
+                MyHeader(),
                 MyBanner(),
                 Category(),
 
@@ -147,8 +151,14 @@ class HomePage extends HookWidget {
 
                 RecommendList(title: '根据 Red 推荐', items: recommendList1, onMore: (){
                   print('more');
-                }, onPlay: (id){
+                }, onPlay: (id, img, title, artist) async {
                   print('play');
+                  res = await getSgUrl(id);
+                  getComment(id);
+                  recommendList1[0]['img']=img;
+                  recommendList1[0]['title']=title;
+                  recommendList1[0]['artist']=artist;
+                  playState.player.play(res);
                 },),
                 Container(
                   height: screen.calc(100),
@@ -170,37 +180,29 @@ void getSongListDetail(int index)async{//拿到歌单每首歌的数据,重置re
   //index表示点击指定歌单时，内部播放的歌曲为不同风格的歌单所包含
   int loc=0;
   getSongList();
+  print('00000000000歌单id为${songList1[index]['id']}');
   final response =
     await DioUtil.getInstance().post("$API_PREFIX/playlist/detail?id=${songList1[index]['id']}", {});
   final data=response.data;
 
   for(int i=0; i<6; i++) {
-    loc++;//不可直接在数组中使用++，否则会 歌曲id对应其作者artist等数据不匹配
-    int sgListDetailSongId = data['playlist']['tracks'][loc]['id'];
+    // if(loc>5) loc=0;
+    // loc++;//不可直接在数组中使用++，否则会 歌曲id对应其作者artist等数据不匹配
+    List trackLen=data['playlist']['tracks'];
+    // if(trackLen.isEmpty) print('此时歌单id为$')
+    int sgListDetailSongId = data['playlist']['tracks'][i]['id'];
     String sgLDSId = sgListDetailSongId.toString();
-    String sgListDetailSongName = data['playlist']['tracks'][loc]['name'];
-    String sgListDetailSongArtist = data['playlist']['tracks'][loc]['ar'][0]['name'];
-    String sgListDetailSongImg = data['playlist']['tracks'][loc]['al']['picUrl'];
-    String sgListDetailSongTip=data['playlist']['tracks'][loc]['al']['name'];
-
-    // final response1 = await DioUtil.getInstance()
-    //     .post("$API_PREFIX/song/url?id=$sgLDSId&br=320000", {});
-    // final data1 = response1.data;
-    // try{
-    //   String url1 = data['data'][0]['url'];
-    //   if(url1==null){
-    //     recommendList1[i]['id']='1430287528';
-    //   }
-    // }catch(e){
-    //   print('errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror');
-    // }
+    String sgListDetailSongName = data['playlist']['tracks'][i]['name'];
+    String sgListDetailSongArtist = data['playlist']['tracks'][i]['ar'][0]['name'];
+    String sgListDetailSongImg = data['playlist']['tracks'][i]['al']['picUrl'];
+    String sgListDetailSongTip=data['playlist']['tracks'][i]['al']['name'];
 
     recommendList1[i]['id']=sgLDSId;
     recommendList1[i]['img']=sgListDetailSongImg;
     recommendList1[i]['title']=sgListDetailSongName;
     recommendList1[i]['artist']=sgListDetailSongArtist;
     recommendList1[i]['tip']=sgListDetailSongTip;
-    print('=============loc: $loc');
+    // print('=============loc: $loc');
 
   }
 }
@@ -211,31 +213,31 @@ void getComment(var id)async{
   final data = response.data;
   var loc=0;
   for(var i=0; i<6; i++){
-    if(loc>20) loc=0;
-    String avatarUrl=data['hotComments'][loc]['user']['avatarUrl'];
-    String nickName=data['hotComments'][loc]['user']['nickname'];
-    String content=data['hotComments'][loc]['content'];
-    var likeCount=data['hotComments'][loc]['likedCount'];
+    // if(loc>10) loc=0;
+    String avatarUrl=data['hotComments'][i]['user']['avatarUrl'];
+    String nickName=data['hotComments'][i]['user']['nickname'];
+    String content=data['hotComments'][i]['content'];
+    var likeCount=data['hotComments'][i]['likedCount'];
     comments[i]['avatar']=avatarUrl;
     comments[i]['nickname']=nickName;
     comments[i]['content']=content;
     comments[i]['likes']=likeCount;
-    loc++;
-    print('--loc: $loc-------content: $content-----------');
+    // loc++;
+    // print('--loc: $loc-------content: $content-----------');
   }
 
 
 }
 
-void getSongSuccess(String id, bool tf)async{//未用
-  final response = await DioUtil.getInstance()
-      .post("$API_PREFIX/song/url?id=$id&br=320000", {});
-  final data = response.data;
-  String url = data['data'][0]['url'];
-  if(url == null){
-
-  }
-}
+// void getSongSuccess(String id, bool tf)async{//未用
+//   final response = await DioUtil.getInstance()
+//       .post("$API_PREFIX/song/url?id=$id&br=320000", {});
+//   final data = response.data;
+//   String url = data['data'][0]['url'];
+//   if(url == null){
+//
+//   }
+// }
 
 void getSongList()async{
   var loc=0;
@@ -244,20 +246,17 @@ void getSongList()async{
   final data=response.data;
 
   for(var i=0; i<6; i++) {
-    if(loc<6) {
-      int sgListId = data['playlists'][loc]['id'];
+    if(i==2) continue;//该歌单内容为空，跳过
+      int sgListId = data['playlists'][i]['id'];
       String sgListId1 = sgListId.toString();
-      String sgListImg = data['playlists'][loc]['coverImgUrl'];
-      String sgListName = data['playlists'][loc]['name'];
+      String sgListImg = data['playlists'][i]['coverImgUrl'];
+      String sgListName = data['playlists'][i]['name'];
 
       songList1[i]['img']=sgListImg;
       songList1[i]['id']=sgListId1;
       songList1[i]['title']=sgListName;
 
       loc++;
-    }else{
-      loc=0;
-    }
   }
 }
 
@@ -282,6 +281,10 @@ void getSongListSquare()async{
       loc=1;
     }
   }
+}
+
+void updateSongDetail(){//用于搜索结果点击歌曲对播放页面进行歌曲信息更改
+
 }
 
 void getSongDetail()async{

@@ -74,6 +74,7 @@ class SongList extends StatelessWidget{
                         print('-------------------------------');
                         print('index: ---> $index');
                         getSongListDetail(index);
+                        cnt=0;
                         Navigator.pushNamed(context, '/player', arguments: {
                           'id': item['id'],
                         });
