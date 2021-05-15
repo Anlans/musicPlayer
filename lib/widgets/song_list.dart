@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:musicplayer/pages/home/home.dart';
+import 'package:musicplayer/pages/player/player.dart';
+import 'package:musicplayer/util/play_state.dart';
 import 'package:musicplayer/util/screen_util.dart';
 import '../main.dart';
 
@@ -15,7 +17,7 @@ class SongList extends StatelessWidget{
   Widget build(BuildContext context) {
     // getSongList();//直接放到Category()调用，这样才可以直接更新歌单精选站的数据
     // getSongDetail();
-
+    final playState=PlayState.of(context);
     // print('-----------------Song: ${songList1[0]['img']}');
     final screen=Screen(context);
 
@@ -70,11 +72,20 @@ class SongList extends StatelessWidget{
                     width: screen.calc(209),
                     margin: EdgeInsets.only(left: screen.calc(10), right: screen.calc(10)),
                     child: GestureDetector(
-                      onTap: (){
+                      onTap: () async {
                         print('-------------------------------');
                         print('index: ---> $index');
-                        getSongListDetail(index);
+                        await getSongListDetail(index);//await关键作用是更新完歌单歌曲数据之后，再进行下面步骤很重要
                         cnt=0;
+
+                        var id=recommendList1[0]['id'];
+                        res=await getSgUrl(id);
+                        print(res);
+                        await getComment(id);
+                        playState.player.play(res);//点击歌单直接播放该歌单第一首歌曲
+                        print('-----------------------cnt: $cnt');
+                        print('onPlayTap');
+
                         Navigator.pushNamed(context, '/player', arguments: {
                           'id': item['id'],
                         });

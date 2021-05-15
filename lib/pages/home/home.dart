@@ -154,7 +154,7 @@ class HomePage extends HookWidget {
                 }, onPlay: (id, img, title, artist) async {
                   print('play');
                   res = await getSgUrl(id);
-                  getComment(id);
+                  await getComment(id);
                   recommendList1[0]['img']=img;
                   recommendList1[0]['title']=title;
                   recommendList1[0]['artist']=artist;
@@ -179,7 +179,7 @@ class HomePage extends HookWidget {
 void getSongListDetail(int index)async{//拿到歌单每首歌的数据,重置recommendList1
   //index表示点击指定歌单时，内部播放的歌曲为不同风格的歌单所包含
   int loc=0;
-  getSongList();
+  await getSongList();
   print('00000000000歌单id为${songList1[index]['id']}');
   final response =
     await DioUtil.getInstance().post("$API_PREFIX/playlist/detail?id=${songList1[index]['id']}", {});
@@ -283,13 +283,22 @@ void getSongListSquare()async{
   }
 }
 
-void updateSongDetail(){//用于搜索结果点击歌曲对播放页面进行歌曲信息更改
-
+void updateSongDetail(var id)async{//用于搜索结果点击歌曲对播放页面进行歌曲信息更改
+  final response =
+      await DioUtil.getInstance().post("$API_PREFIX/song/detail?ids=$id", {});
+  final data=response.data;
+  String searchSongImg=data['songs'][0]['al']['picUrl'];
+  String searchSongName=data['songs'][0]['name'];
+  String searchSongArtist=data['songs'][0]['ar'][0]['name'];
+  recommendList1[0]['img']=searchSongImg;
+  recommendList1[0]['title']=searchSongName;
+  recommendList1[0]['artist']=searchSongArtist;
+  print('**************Ar: $searchSongArtist');
 }
 
 void getSongDetail()async{
-  getSongList();
-  getSongListDetail(3);
+  await getSongList();
+  await getSongListDetail(3);
 
 
   // final response =

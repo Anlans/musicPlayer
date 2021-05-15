@@ -8,10 +8,11 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // getSongListDetail(3);
-    getSongListSquare();
-    getSongDetail();
+
     final screen = Screen(context);
-    Timer(Duration(seconds: 3),(){
+    Timer(Duration(seconds: 3),() async {
+      await getSongListSquare();
+      await getSongDetail();
       Navigator.pushReplacementNamed(context, '/home');
     });
 

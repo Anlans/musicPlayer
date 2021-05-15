@@ -61,7 +61,8 @@ class MyHeader extends HookWidget{
                   child: GestureDetector(
                     onTap: ()async{
                       print('controller: ${controller.value.value.text}');
-                      getSearchList(controller.value.value.text.toString());
+                      await getSearchList(controller.value.value.text.toString());
+                      // controller.value=null;
                       Timer(Duration(seconds: 2), () {
                         print("2秒后执行");
                         Navigator.pushNamed(context, '/searchlist');

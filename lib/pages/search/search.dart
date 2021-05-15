@@ -81,12 +81,12 @@ class _ListItem extends StatelessWidget{
     final screen=Screen(context);
     final playState=PlayState.of(context);
     var res;
-
     return GestureDetector(
       onTap: ()async{
         // print('aaaaaaaaaaaaaaaaaa: $id');
+        await updateSongDetail(id);//用于右上全局播放小组件的歌曲信息
         res = await getSgUrl(id);
-        getComment(id);
+        await getComment(id);
         // recommendList1[0]['id']=id;
         // // recommendList1[0]['img']=;
         // recommendList1[0]['title']=title;

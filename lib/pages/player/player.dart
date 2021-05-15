@@ -24,8 +24,6 @@ final length=recommendList1.length;
 class PlayerPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-
-
     final screen=Screen(context);
     // final args=ModalRoute.of(context).settings.arguments as Map;
     final playState=PlayState.of(context);
@@ -80,13 +78,13 @@ class PlayerPage extends StatelessWidget{
                   ControlPanel2(
                     playing: playState.playing,
                     onPlayTap: ()async{
-                      var id=recommendList1[0]['id'];
-                      res=await getSgUrl(id);
-                      print(res);
-
+                      // var id=recommendList1[0]['id'];
+                      // res=await getSgUrl(id);
+                      // print(res);
+                      //
                       playState.player.play(res);
-                      print('-----------------------cnt: $cnt');
-                      print('onPlayTap');
+                      // print('-----------------------cnt: $cnt');
+                      // print('onPlayTap');
                       //播放时设为true，图标显示为pause
                     },
                     onPauseTap: ()async{
