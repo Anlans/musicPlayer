@@ -207,6 +207,37 @@ void getSongListDetail(int index)async{//拿到歌单每首歌的数据,重置re
   }
 }
 
+void getSquareSongListDetail(int songListId)async{//拿到歌单每首歌的数据,重置recommendList1
+  //index表示点击指定歌单时，内部播放的歌曲为不同风格的歌单所包含
+  int loc=0;
+  await getSongList();
+  print('00000000000歌单id为${songListId}');
+  final response =
+  await DioUtil.getInstance().post("$API_PREFIX/playlist/detail?id=$songListId", {});
+  final data=response.data;
+
+  for(int i=0; i<6; i++) {
+    // if(loc>5) loc=0;
+    // loc++;//不可直接在数组中使用++，否则会 歌曲id对应其作者artist等数据不匹配
+    List trackLen=data['playlist']['tracks'];
+    // if(trackLen.isEmpty) print('此时歌单id为$')
+    int sgListDetailSongId = data['playlist']['tracks'][i]['id'];
+    String sgLDSId = sgListDetailSongId.toString();
+    String sgListDetailSongName = data['playlist']['tracks'][i]['name'];
+    String sgListDetailSongArtist = data['playlist']['tracks'][i]['ar'][0]['name'];
+    String sgListDetailSongImg = data['playlist']['tracks'][i]['al']['picUrl'];
+    String sgListDetailSongTip=data['playlist']['tracks'][i]['al']['name'];
+
+    recommendList1[i]['id']=sgLDSId;
+    recommendList1[i]['img']=sgListDetailSongImg;
+    recommendList1[i]['title']=sgListDetailSongName;
+    recommendList1[i]['artist']=sgListDetailSongArtist;
+    recommendList1[i]['tip']=sgListDetailSongTip;
+    // print('=============loc: $loc');
+
+  }
+}
+
 void getComment(var id)async{
   final response = await DioUtil.getInstance()
       .post("$API_PREFIX/comment/music?id=$id&limit=20", {});

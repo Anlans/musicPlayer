@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:musicplayer/pages/player/player.dart';
+import 'package:musicplayer/util/play_state.dart';
 import 'package:musicplayer/util/screen_util.dart';
 import 'package:musicplayer/pages/home/home.dart';
 
-
+var res;
 
 class SquareList extends StatelessWidget{
   final List<Map> items;
@@ -14,6 +16,7 @@ class SquareList extends StatelessWidget{
     // getSongListSquare();
     final screen=Screen(context);
     // print(items.length);
+    final playState=PlayState.of(context);
     final rows=[];
 
     for(var i=0; i<items.length; i+=3){
@@ -36,11 +39,28 @@ class SquareList extends StatelessWidget{
                 height: screen.calc(300),
                 child: Column(
                   children: [
-                    Image.network(
-                      item['img'],
-                      width: screen.calc(214),
-                      height: screen.calc(214),
-                      fit: BoxFit.fill,
+                    GestureDetector(
+
+                      onTap: ()async{
+                        await getSquareSongListDetail(item['id']);
+                        var id=recommendList1[0]['id'];
+                        res=await getSgUrl(id);
+                        print(res);
+                        await getComment(id);
+                        playState.player.play(res);//点击歌单直接播放该歌单第一首歌曲
+
+                        Navigator.pushNamed(context, '/player', arguments: {
+                          'id': item['id'],
+                        });
+                      },
+                      child: Container(
+                        child: Image.network(
+                          item['img'],
+                          width: screen.calc(214),
+                          height: screen.calc(214),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: screen.calc(8)),

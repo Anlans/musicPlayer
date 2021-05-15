@@ -62,12 +62,10 @@ class MyHeader extends HookWidget{
                     onTap: ()async{
                       print('controller: ${controller.value.value.text}');
                       await getSearchList(controller.value.value.text.toString());
-                      // controller.value=null;
                       Timer(Duration(seconds: 2), () {
                         print("2秒后执行");
                         Navigator.pushNamed(context, '/searchlist');
                       });
-
                     },
                     child: Container(
                       width: screen.calc(522),
