@@ -158,7 +158,8 @@ getSgUrl(String id) async {
   // print('**************************');
   String url = data['data'][0]['url'];
   if(url==null){//防止无权限歌曲的出现，导致歌曲空挡
-    url='http://m801.music.126.net/20210403175852/e3f6214608219b5c517ace89919eb342/jdymusic/obj/w5zDlMODwrDDiGjCn8Ky/1668938014/7cda/6ba0/49ff/1f7a90a7869eba1ef4d454e2db6f5b87.mp3';
+    // url='http://m801.music.126.net/20210403175852/e3f6214608219b5c517ace89919eb342/jdymusic/obj/w5zDlMODwrDDiGjCn8Ky/1668938014/7cda/6ba0/49ff/1f7a90a7869eba1ef4d454e2db6f5b87.mp3';
+    url='http://music.163.com/song/media/outer/url?id=404465743.mp3';
   }
   url = 'https${url.split('http')[1]}';
   print('**************************');

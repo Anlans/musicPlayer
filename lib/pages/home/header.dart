@@ -9,7 +9,7 @@ import 'package:musicplayer/util/screen_util.dart';
 import 'package:musicplayer/widgets/playing.dart';
 import 'package:musicplayer/pages/home/home.dart';
 
-var searchList=[  //推荐列表歌曲信息
+var searchList=[  //搜索列表歌曲信息
   {'id':'1304953534', 'img': 'https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg', 'name': '山河令', 'artist': '茶理理'},
   {'id':'1304953534', 'img': 'https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg', 'name': '山河令', 'artist': '茶理理'},
   {'id':'1304953534', 'img': 'https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg', 'name': '山河令', 'artist': '茶理理'},
